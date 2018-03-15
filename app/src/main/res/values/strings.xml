@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Classmere</string>
+    <string name="loading_error_message">Oops, we could not load your results. Please try again. </string>
+</resources>
