@@ -3,8 +3,11 @@ package com.example.classmere.classmere.Utilities;
 import android.net.ParseException;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,9 +37,11 @@ public class ClassmereUtils {
     public static class CourseItem implements Serializable {
         public static final String EXTRA_COURSE_ITEM = "com.example.classmere.classmere.utils.CourseItem.SearchResult";
 
-        public String classCode;
+        public String subjectCode;
+        public String courseNumber;
         public String className;
-        public String Description;
+        public int credits;
+        public String description;
         public String buildingLocation;
     }
 
@@ -52,10 +57,21 @@ public class ClassmereUtils {
         return builder.build().toString();
     }
 
-    public static ArrayList<CourseItem> parseCourseJSON(String courseJSON) {
+    public static CourseItem parseCourseJSON(String courseResultsJSON) {
         try {
+            JSONObject courseResultsObj = new JSONObject(courseResultsJSON);
+            CourseItem courseItem = new CourseItem();
 
-            return courseItemsList;
+            courseItem.subjectCode = (String) courseResultsObj.get("subjectCode");
+            courseItem.courseNumber = (String) courseResultsObj.get("courseNumber");
+            courseItem.className = (String) courseResultsObj.get("title");
+            courseItem.credits = (int) courseResultsObj.get("credits");
+            courseItem.description = (String) courseResultsObj.get("description");
+
+            Log.d(TAG, "Class Code: " + courseItem.subjectCode + courseItem.courseNumber);
+            Log.d(TAG, "Class name: " + courseItem.className);
+
+            return courseItem;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

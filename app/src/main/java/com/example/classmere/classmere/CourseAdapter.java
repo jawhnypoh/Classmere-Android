@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.classmere.classmere.Utilities.ClassmereUtils;
+
 /**
  * Created by poj on 3/15/18.
  */
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItemViewHolder> {
+
+    private ClassmereUtils.CourseItem mCourseItem;
 
     private static final String TAG = "CourseAdapter: ";
 
@@ -47,7 +51,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItem
 
     @Override
     public int getItemCount() {
-
+        if(mCourseItem != null) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     class CourseItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
