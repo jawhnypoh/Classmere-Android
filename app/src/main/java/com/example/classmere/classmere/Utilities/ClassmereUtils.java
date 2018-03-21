@@ -71,10 +71,11 @@ public class ClassmereUtils {
             JSONObject courseResultsObj;
             JSONArray courseResultsItems = new JSONArray(courseResultsJSON);
             Log.d(TAG, "Sections: " + courseResultsItems);
-            CourseItem courseItem = new CourseItem();
 //
             ArrayList<CourseItem> courseResultsList = new ArrayList<CourseItem>();
             for(int i=0; i<courseResultsItems.length(); i++) {
+                CourseItem courseItem = new CourseItem();
+
                 courseResultsObj = courseResultsItems.getJSONObject(i);
                 courseItem.subjectCode = (String) courseResultsObj.get("subjectCode");
                 courseItem.courseNumber = (int) courseResultsObj.get("courseNumber");
@@ -84,6 +85,8 @@ public class ClassmereUtils {
 
                 Log.d(TAG, "Class Code: " + courseItem.subjectCode + courseItem.courseNumber);
                 Log.d(TAG, "Class name: " + courseItem.className);
+
+                courseResultsList.add(courseItem);
             }
 
             return courseResultsList;

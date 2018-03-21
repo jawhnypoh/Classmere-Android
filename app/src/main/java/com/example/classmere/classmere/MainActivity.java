@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
             }
         });
 
+        String startQuery = "";
+        doCourseSearch(startQuery);
+
         getSupportLoaderManager().initLoader(CLASSMERE_SEARCH_LOADER_ID, null, this);
     }
 
@@ -108,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
             mLoadingProgressBar.setVisibility(View.INVISIBLE);
             mSearchResultsRV.setVisibility(View.VISIBLE);
             ArrayList<ClassmereUtils.CourseItem> courseItems = ClassmereUtils.parseCourseJSON(data);
+            Log.d(TAG, "arraylist.size is: " + String.valueOf(courseItems.size()));
             mCourseAdapter.updateCourseItems(courseItems);
         }
         else {

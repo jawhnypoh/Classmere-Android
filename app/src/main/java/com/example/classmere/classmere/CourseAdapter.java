@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItemViewHolder> {
 
-    private ClassmereUtils.CourseItem mCourseItem;
     private ArrayList<ClassmereUtils.CourseItem> mCourseResultsList;
 
     private static final String TAG = "CourseAdapter: ";
@@ -37,7 +36,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItem
     }
 
     public void updateCourseItems(ArrayList<ClassmereUtils.CourseItem> courseItems) {
-
+        mCourseResultsList = courseItems;
         notifyDataSetChanged();
     }
 
@@ -56,15 +55,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItem
 
     @Override
     public int getItemCount() {
-        if(mCourseItem != null) {
-            return 1;
+        if(mCourseResultsList != null) {
+            return mCourseResultsList.size();
         }
         else {
             return 0;
         }
     }
 
-    class CourseItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class CourseItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mCourseResultTV;
 
@@ -73,16 +72,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItem
 
             mCourseResultTV = (TextView)itemView.findViewById(R.id.tv_search_result);
 
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClassmereUtils.CourseItem courseItem = mCourseResultsList.get(getAdapterPosition());
+                    mCourseItemClickListener.onCourseItemClick(courseItem);
+                }
+            });
         }
 
         public void bind(ClassmereUtils.CourseItem courseItem) {
             mCourseResultTV.setText(courseItem.className);
-        }
-
-        @Override
-        public void onClick(View v) {
-
         }
     }
 }
