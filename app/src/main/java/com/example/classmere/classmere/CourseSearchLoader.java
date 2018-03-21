@@ -31,9 +31,10 @@ public class CourseSearchLoader extends AsyncTaskLoader<String> {
                 Log.d(TAG, "Loader returning cached results. ");
                 deliverResult(mCourseResultsJSON);
             }
-        }
-        else {
-            forceLoad();
+            else {
+                Log.d(TAG, "forceLoad() called. ");
+                forceLoad();
+            }
         }
     }
 
@@ -50,6 +51,7 @@ public class CourseSearchLoader extends AsyncTaskLoader<String> {
             return courseResults;
         }
         else {
+            Log.d(TAG, "null has been returned ");
             return null;
         }
     }

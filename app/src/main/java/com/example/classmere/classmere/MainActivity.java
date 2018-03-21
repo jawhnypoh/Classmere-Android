@@ -1,6 +1,8 @@
 package com.example.classmere.classmere;
 
 import android.content.Intent;
+import android.net.Network;
+import android.os.AsyncTask;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +18,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
+import com.example.classmere.classmere.Utilities.NetworkUtils;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CourseAdapter.OnCourseItemClickListener, LoaderManager.LoaderCallbacks<String> {
@@ -62,10 +66,11 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
                 }
             }
         });
+
+        getSupportLoaderManager().initLoader(CLASSMERE_SEARCH_LOADER_ID, null, this);
     }
 
     private void doCourseSearch(String searchQuery) {
-        Log.d(TAG, "searchButton clicked and called doCourseSearch()! ");
 
         String courseSearchURL = ClassmereUtils.buildClassmereURL(searchQuery);
         Bundle args = new Bundle();
@@ -89,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
         if(args != null) {
             courseSearchURL = args.getString(COURSE_SEARCH_KEY);
         }
+
+        Log.d(TAG, "onCreateLoader() courseSearchURL: " + courseSearchURL);
         return new CourseSearchLoader(this, courseSearchURL);
     }
 
@@ -113,4 +120,42 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
     public void onLoaderReset(Loader<String> loader) {
         // Nothing to do here
     }
+
+//    public class CourseSearchTask extends AsyncTask<String, Void, String> {
+//        @Override
+//        public void onPreExecute() {
+//            super.onPreExecute();
+//            mLoadingProgressBar.setVisibility(View.VISIBLE);
+//        }
+//
+//        @Override
+//        public String doInBackground(String ...urls) {
+//            String courseSearchURL = urls[0];
+//
+//            Log.d(TAG, "doInBackground(): courseSearchURL: " + courseSearchURL);
+//            String courseResults = null;
+//            try {
+//                courseResults = NetworkUtils.doHTTPGet(courseSearchURL);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return courseResults;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            mLoadingProgressBar.setVisibility(View.INVISIBLE);
+//            if(s != null) {
+//                ArrayList<ClassmereUtils.CourseItem> courseResultsList = ClassmereUtils.parseCourseJSON(s);
+//                mCourseAdapter.updateCourseItems(courseResultsList);
+//                mSearchBoxET.setText("");
+//                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+//                mSearchResultsRV.setVisibility(View.VISIBLE);
+//            }
+//            else {
+//                mSearchResultsRV.setVisibility(View.INVISIBLE);
+//                mLoadingErrorMessage.setVisibility(View.VISIBLE);
+//            }
+//        }
+//    }
 }
