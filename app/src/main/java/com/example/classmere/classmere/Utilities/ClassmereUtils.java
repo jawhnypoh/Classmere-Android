@@ -41,9 +41,9 @@ public class ClassmereUtils {
         public static final String EXTRA_COURSE_ITEM = "com.example.classmere.classmere.utils.CourseItem.SearchResult";
 
         public String subjectCode;
-        public String courseNumber;
+        public int courseNumber;
         public String className;
-        public int credits;
+        //public int credits;
         public String description;
         public String buildingLocation;
     }
@@ -59,6 +59,7 @@ public class ClassmereUtils {
         builder.appendPath(CLASSMERE_COURSE_BASE);
         if(!TextUtils.isEmpty(searchQuery)) {
             builder.appendPath(searchQuery);
+            //builder.appendPath("161");
         }
 
         return builder.build().toString();
@@ -66,18 +67,20 @@ public class ClassmereUtils {
 
     public static ArrayList<CourseItem> parseCourseJSON(String courseResultsJSON) {
         try {
-            JSONObject courseResultsObj = new JSONObject(courseResultsJSON);
-            JSONArray courseResultsItems = courseResultsObj.getJSONArray("");
+            //JSONObject courseResultsObj = new JSONObject(courseResultsJSON);
+            JSONObject courseResultsObj;
+            JSONArray courseResultsItems = new JSONArray(courseResultsJSON);
             Log.d(TAG, "Sections: " + courseResultsItems);
             CourseItem courseItem = new CourseItem();
-
+//
             ArrayList<CourseItem> courseResultsList = new ArrayList<CourseItem>();
             for(int i=0; i<courseResultsItems.length(); i++) {
+                courseResultsObj = courseResultsItems.getJSONObject(i);
                 courseItem.subjectCode = (String) courseResultsObj.get("subjectCode");
-                courseItem.courseNumber = (String) courseResultsObj.get("courseNumber");
+                courseItem.courseNumber = (int) courseResultsObj.get("courseNumber");
                 courseItem.className = (String) courseResultsObj.get("title");
-                courseItem.credits = (int) courseResultsObj.get("credits");
-                courseItem.description = (String) courseResultsObj.get("description");
+                //courseItem.credits = (int) courseResultsObj.get("credits");
+                //courseItem.description = (String) courseResultsObj.get("description");
 
                 Log.d(TAG, "Class Code: " + courseItem.subjectCode + courseItem.courseNumber);
                 Log.d(TAG, "Class name: " + courseItem.className);

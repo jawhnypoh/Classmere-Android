@@ -6,8 +6,11 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItemViewHolder> {
 
     private ClassmereUtils.CourseItem mCourseItem;
+    private ArrayList<ClassmereUtils.CourseItem> mCourseResultsList;
 
     private static final String TAG = "CourseAdapter: ";
 
@@ -47,7 +51,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItem
 
     @Override
     public void onBindViewHolder(CourseItemViewHolder holder, int position) {
-
+        holder.bind(mCourseResultsList.get(position));
     }
 
     @Override
@@ -62,14 +66,18 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItem
 
     class CourseItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private TextView mCourseResultTV;
+
         public CourseItemViewHolder(View itemView) {
             super(itemView);
+
+            mCourseResultTV = (TextView)itemView.findViewById(R.id.tv_search_result);
 
             itemView.setOnClickListener(this);
         }
 
-        public void bind() {
-
+        public void bind(ClassmereUtils.CourseItem courseItem) {
+            mCourseResultTV.setText(courseItem.className);
         }
 
         @Override
