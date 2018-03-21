@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
 
+import java.util.ArrayList;
+
 /**
  * Created by poj on 3/15/18.
  */
@@ -23,15 +25,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseItem
     private Context mContext;
 
     public interface OnCourseItemClickListener {
-        void onCourseItemClickListener();
+        void onCourseItemClick(ClassmereUtils.CourseItem courseItem);
     }
 
-    public CourseAdapter(Context context, OnCourseItemClickListener clickListener) {
-        mContext = context;
+    public CourseAdapter(OnCourseItemClickListener clickListener) {
         mCourseItemClickListener = clickListener;
     }
 
-    public void updateCourseItems() {
+    public void updateCourseItems(ArrayList<ClassmereUtils.CourseItem> courseItems) {
 
         notifyDataSetChanged();
     }
