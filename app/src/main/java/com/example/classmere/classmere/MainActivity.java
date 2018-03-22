@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
             public void onClick(View v) {
                 String searchQuery = mSearchBoxET.getText().toString();
                 if (!TextUtils.isEmpty(searchQuery)) {
-                    
+
                     InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
 
@@ -153,42 +153,4 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
     public void onLoaderReset(Loader<String> loader) {
         // Nothing to do here
     }
-
-//    public class CourseSearchTask extends AsyncTask<String, Void, String> {
-//        @Override
-//        public void onPreExecute() {
-//            super.onPreExecute();
-//            mLoadingProgressBar.setVisibility(View.VISIBLE);
-//        }
-//
-//        @Override
-//        public String doInBackground(String ...urls) {
-//            String courseSearchURL = urls[0];
-//
-//            Log.d(TAG, "doInBackground(): courseSearchURL: " + courseSearchURL);
-//            String courseResults = null;
-//            try {
-//                courseResults = NetworkUtils.doHTTPGet(courseSearchURL);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return courseResults;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            mLoadingProgressBar.setVisibility(View.INVISIBLE);
-//            if(s != null) {
-//                ArrayList<ClassmereUtils.CourseItem> courseResultsList = ClassmereUtils.parseCourseJSON(s);
-//                mCourseAdapter.updateCourseItems(courseResultsList);
-//                mSearchBoxET.setText("");
-//                mLoadingProgressBar.setVisibility(View.INVISIBLE);
-//                mSearchResultsRV.setVisibility(View.VISIBLE);
-//            }
-//            else {
-//                mSearchResultsRV.setVisibility(View.INVISIBLE);
-//                mLoadingErrorMessage.setVisibility(View.VISIBLE);
-//            }
-//        }
-//    }
 }

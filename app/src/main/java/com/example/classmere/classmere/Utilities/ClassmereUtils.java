@@ -26,6 +26,7 @@ public class ClassmereUtils {
 
     public final static String CLASSMERE_BASE_URL = "http://api.classmere.com/";
 
+
     /**** Classmere Course API Call: http://api.classmere.com/search/courses/SEARCH_STRING ****/
 
     public final static String CLASSMERE_COURSE_SEARCH_BASE = "search";
@@ -34,7 +35,7 @@ public class ClassmereUtils {
     /**** Classmere Building API Call: http://api.classmere.com/Building/CODE ****/
 
     public final static String CLASSMERE_BUILDING_BASE = "buildings";
-    public final static String CLASSMERE_BUILDING_CODE = "";
+
 
     public static class CourseItem implements Serializable {
         public static final String EXTRA_COURSE_ITEM = "com.example.classmere.classmere.utils.CourseItem.SearchResult";
@@ -44,7 +45,8 @@ public class ClassmereUtils {
         public String className;
         public String credits;
         public String description;
-        public String buildingLocation;
+        public String buildingCode;
+        public String roomNumber;
     }
 
     public static String buildClassmereURL(String searchQuery) {
@@ -59,9 +61,19 @@ public class ClassmereUtils {
         return builder.build().toString();
     }
 
+    public static String buildBuildingURL(String buildingQuery) {
+        Uri.Builder builder = Uri.parse(CLASSMERE_BASE_URL).buildUpon();
+
+        builder.appendPath(CLASSMERE_BUILDING_BASE);
+        if(!TextUtils.isEmpty(buildingQuery)) {
+            builder.appendPath(buildingQuery);
+        }
+
+        return builder.build().toString();
+    }
+
     public static ArrayList<CourseItem> parseCourseJSON(String courseResultsJSON) {
         try {
-            //JSONObject courseResultsObj = new JSONObject(courseResultsJSON);
             JSONObject courseResultsObj;
             JSONArray courseResultsItems = new JSONArray(courseResultsJSON);
 
@@ -75,6 +87,8 @@ public class ClassmereUtils {
                 courseItem.className = (String) courseResultsObj.get("title");
                 courseItem.credits = (String) courseResultsObj.get("credits");
                 courseItem.description = (String) courseResultsObj.get("description");
+                courseItem.buildingCode = (String) courseResultsObj.get("buildingCode");
+                courseItem.roomNumber = (String) courseResultsObj.get("roomNumber");
 
                 courseResultsList.add(courseItem);
             }
