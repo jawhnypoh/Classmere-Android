@@ -1,5 +1,6 @@
 package com.example.classmere.classmere;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Network;
 import android.os.AsyncTask;
@@ -11,7 +12,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -48,6 +52,29 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
         mLoadingErrorMessage = (TextView)findViewById(R.id.tv_loading_error);
 
         mSearchBoxET = (EditText)findViewById(R.id.et_search_box);
+        mSearchBoxET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                boolean handled = false;
+
+                String searchQuery = mSearchBoxET.getText().toString();
+
+                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if(!TextUtils.isEmpty(searchQuery)) {
+
+                        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
+
+                        doCourseSearch(searchQuery);
+                        Log.d(TAG, "IME Search handled correctly ");
+                        handled = true;
+                    }
+                }
+                Log.d(TAG, "IME Search not handled correctly ");
+                return handled;
+            }
+        });
+
         mSearchResultsRV = (RecyclerView)findViewById(R.id.rv_search_results);
 
         mSearchResultsRV.setLayoutManager(new LinearLayoutManager(this));
@@ -62,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
             public void onClick(View v) {
                 String searchQuery = mSearchBoxET.getText().toString();
                 if (!TextUtils.isEmpty(searchQuery)) {
+                    
+                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mSearchBoxET.getWindowToken(), 0);
+
                     doCourseSearch(searchQuery);
                 }
             }
