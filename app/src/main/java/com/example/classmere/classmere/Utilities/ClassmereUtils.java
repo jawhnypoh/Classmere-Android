@@ -26,11 +26,10 @@ public class ClassmereUtils {
 
     public final static String CLASSMERE_BASE_URL = "http://api.classmere.com/";
 
-    /**** Classmere Course API Call: http://api.classmere.com/Course/CODE/NUM ****/
+    /**** Classmere Course API Call: http://api.classmere.com/search/courses/SEARCH_STRING ****/
 
-    public final static String CLASSMERE_COURSE_BASE = "Courses";
-    public final static String CLASSMERE_COURSE_CODE = "";
-    public final static String CLASSMERE_COURSE_NUM = "";
+    public final static String CLASSMERE_COURSE_SEARCH_BASE = "search";
+    public final static String CLASSMERE_COURSE_BASE = "courses";
 
     /**** Classmere Building API Call: http://api.classmere.com/Building/CODE ****/
 
@@ -43,7 +42,7 @@ public class ClassmereUtils {
         public String subjectCode;
         public int courseNumber;
         public String className;
-        //public int credits;
+        public String credits;
         public String description;
         public String buildingLocation;
     }
@@ -51,15 +50,10 @@ public class ClassmereUtils {
     public static String buildClassmereURL(String searchQuery) {
         Uri.Builder builder = Uri.parse(CLASSMERE_BASE_URL).buildUpon();
 
-//        builder.appendQueryParameter(CLASSMERE_COURSE_CODE, courseCode);
-//
-//        if(!TextUtils.isEmpty(courseNum)) {
-//            builder.appendQueryParameter(CLASSMERE_COURSE_NUM, courseNum);
-//        }
+        builder.appendPath(CLASSMERE_COURSE_SEARCH_BASE);
         builder.appendPath(CLASSMERE_COURSE_BASE);
         if(!TextUtils.isEmpty(searchQuery)) {
             builder.appendPath(searchQuery);
-            //builder.appendPath("161");
         }
 
         return builder.build().toString();
@@ -70,8 +64,7 @@ public class ClassmereUtils {
             //JSONObject courseResultsObj = new JSONObject(courseResultsJSON);
             JSONObject courseResultsObj;
             JSONArray courseResultsItems = new JSONArray(courseResultsJSON);
-            Log.d(TAG, "Sections: " + courseResultsItems);
-//
+
             ArrayList<CourseItem> courseResultsList = new ArrayList<CourseItem>();
             for(int i=0; i<courseResultsItems.length(); i++) {
                 CourseItem courseItem = new CourseItem();
@@ -80,11 +73,8 @@ public class ClassmereUtils {
                 courseItem.subjectCode = (String) courseResultsObj.get("subjectCode");
                 courseItem.courseNumber = (int) courseResultsObj.get("courseNumber");
                 courseItem.className = (String) courseResultsObj.get("title");
-                //courseItem.credits = (int) courseResultsObj.get("credits");
-                //courseItem.description = (String) courseResultsObj.get("description");
-
-                Log.d(TAG, "Class Code: " + courseItem.subjectCode + courseItem.courseNumber);
-                Log.d(TAG, "Class name: " + courseItem.className);
+                courseItem.credits = (String) courseResultsObj.get("credits");
+                courseItem.description = (String) courseResultsObj.get("description");
 
                 courseResultsList.add(courseItem);
             }
