@@ -87,8 +87,8 @@ public class ClassmereUtils {
                 courseItem.className = (String) courseResultsObj.get("title");
                 courseItem.credits = (String) courseResultsObj.get("credits");
                 courseItem.description = (String) courseResultsObj.get("description");
-                courseItem.buildingCode = (String) courseResultsObj.get("buildingCode");
-                courseItem.roomNumber = (String) courseResultsObj.get("roomNumber");
+                //courseItem.buildingCode = (String) courseResultsObj.get("buildingCode");
+                //courseItem.roomNumber = (String) courseResultsObj.get("roomNumber");
 
                 courseResultsList.add(courseItem);
             }
