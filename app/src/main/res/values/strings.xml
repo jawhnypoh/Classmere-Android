@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Classmere</string>
-    <string name="loading_error_message">Oops, we could not load your results. Please try again. </string>
+    <string name="loading_error_message">Oops! We could not load your results. Please check your connection and try again. </string>
+    <string name="about_text">Classmere is a course catalog application that helps Oregon State University students search for cool classes and manage their courseload. </string>
+    <string name="about_text_2">This application is based off of the iOS Classmere app, and utilizes the Classmere API that was created by Brandon Lee and Rutger Farry.</string>
 </resources>

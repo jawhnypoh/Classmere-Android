@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:padding="16dp"
+            android:paddingLeft="20sp"
             android:text="@string/loading_error_message"
             android:visibility="invisible" />
 
