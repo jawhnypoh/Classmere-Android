@@ -1,5 +1,6 @@
 # Classmere for Android
-Finding classes that interest you, help you graduate and fit your schedule can be a pain. Classmere's Android app helps Oregon State students search for cool classes and manage their courseload.
+Finding classes that interest you, help you graduate and fit your schedule can be a pain. Classmere's Android app helps Oregon State students search for cool classes and manage their courseload. This application is the Android version based off of the [Classmere for iOS app](https://github.com/classmere/ios). 
+
 
 ### Meta
 - **State:** In Development
