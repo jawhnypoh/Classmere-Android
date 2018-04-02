@@ -17,6 +17,7 @@ public class detailedCourseResultActivity extends AppCompatActivity {
     private TextView mTVCourseResultTitle;
     private TextView mTVCourseResultCredits;
     private TextView mTVCouresResultDescription;
+    private TextView mTVCourseResultSections;
 
     private ClassmereUtils.CourseItem mCourseItem;
 
@@ -27,6 +28,7 @@ public class detailedCourseResultActivity extends AppCompatActivity {
         mTVCourseResultTitle = (TextView) findViewById(R.id.tv_course_title);
         mTVCourseResultCredits = (TextView) findViewById(R.id.tv_course_credits);
         mTVCouresResultDescription = (TextView) findViewById(R.id.tv_course_description);
+        mTVCourseResultSections = (TextView) findViewById(R.id.tv_course_sections);
 
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra(ClassmereUtils.EXTRA_COURSE_RESULT)) {
@@ -34,6 +36,7 @@ public class detailedCourseResultActivity extends AppCompatActivity {
             mTVCourseResultTitle.setText(mCourseItem.className);
             mTVCouresResultDescription.setText(mCourseItem.description);
             mTVCourseResultCredits.setText(mCourseItem.credits + " Credits");
+            mTVCourseResultSections.setText(mCourseItem.courseSection);
         }
     }
 }

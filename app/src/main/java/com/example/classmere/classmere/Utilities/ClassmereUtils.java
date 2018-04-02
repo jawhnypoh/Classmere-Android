@@ -45,6 +45,7 @@ public class ClassmereUtils {
         public String className;
         public String credits;
         public String description;
+        public String courseSection;
         public String buildingCode;
         public String roomNumber;
     }
@@ -87,6 +88,14 @@ public class ClassmereUtils {
                 courseItem.className = (String) courseResultsObj.get("title");
                 courseItem.credits = (String) courseResultsObj.get("credits");
                 courseItem.description = (String) courseResultsObj.get("description");
+
+                ArrayList<CourseItem> courseResultsSections = new ArrayList<CourseItem>();
+                JSONArray courseResultsSectionsJSON = courseResultsObj.getJSONArray("sections");
+                for(int j=0; j<courseResultsSectionsJSON.length(); j++) {
+                    JSONObject courseSectionObj = courseResultsSectionsJSON.getJSONObject(j);
+                    courseItem.courseSection = (String) courseSectionObj.get("term");
+                    Log.d(TAG, "courseSection = " + courseItem.courseSection);
+                }
                 //courseItem.buildingCode = (String) courseResultsObj.get("buildingCode");
                 //courseItem.roomNumber = (String) courseResultsObj.get("roomNumber");
 
