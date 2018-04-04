@@ -3,6 +3,8 @@ package com.example.classmere.classmere;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
@@ -11,13 +13,17 @@ import com.example.classmere.classmere.Utilities.ClassmereUtils;
  * Created by poj on 3/20/18.
  */
 
-public class detailedCourseResultActivity extends AppCompatActivity {
+public class detailedCourseResultActivity extends AppCompatActivity implements CourseSectionAdapter.OnCourseSectionItemClickListener {
+
     private static final String TAG = "detailedCourseResultActivity: ";
 
     private TextView mTVCourseResultTitle;
     private TextView mTVCourseResultCredits;
     private TextView mTVCouresResultDescription;
     private TextView mTVCourseResultSections;
+
+    private RecyclerView mSectionResultsRV;
+    private CourseSectionAdapter mCourseSectionAdapter;
 
     private ClassmereUtils.CourseItem mCourseItem;
 
@@ -36,7 +42,22 @@ public class detailedCourseResultActivity extends AppCompatActivity {
             mTVCourseResultTitle.setText(mCourseItem.className);
             mTVCouresResultDescription.setText(mCourseItem.description);
             mTVCourseResultCredits.setText(mCourseItem.credits + " Credits");
-            mTVCourseResultSections.setText(mCourseItem.courseSection);
+            //mTVCourseResultSections.setText(mCourseItem.courseSection);
         }
+
+        mSectionResultsRV = (RecyclerView)findViewById(R.id.rv_section_results);
+
+        mSectionResultsRV.setLayoutManager(new LinearLayoutManager(this));
+        mSectionResultsRV.setHasFixedSize(true);
+
+        mCourseSectionAdapter = new CourseSectionAdapter(this);
+        mSectionResultsRV.setAdapter(mCourseSectionAdapter);
+    }
+
+    @Override
+    public void onCourseSectionItemClick(ClassmereUtils.CourseItem courseItem) {
+        Intent detailedSectionResultIntent = new Intent(this, detailedSectionResultActivity.class);
+        detailedSectionResultIntent.putExtra(ClassmereUtils.EXTRA_COURSE_RESULT, courseItem);
+        startActivity(detailedSectionResultIntent);
     }
 }

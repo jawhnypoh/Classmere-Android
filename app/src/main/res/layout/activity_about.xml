@@ -38,4 +38,14 @@
         android:textColor="#000"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/about_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="center_horizontal"
+        android:text="Developed by Johnny Po"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
 </LinearLayout>

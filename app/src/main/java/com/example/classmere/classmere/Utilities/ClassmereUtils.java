@@ -45,6 +45,11 @@ public class ClassmereUtils {
         public String className;
         public String credits;
         public String description;
+    }
+
+    public static class SectionItem implements Serializable {
+        public static final String EXTRA_SECTION_ITEM = "com.example.classmere.classmere.utils.SectionItem.SearchResult";
+
         public String courseSection;
         public String buildingCode;
         public String roomNumber;
@@ -89,15 +94,16 @@ public class ClassmereUtils {
                 courseItem.credits = (String) courseResultsObj.get("credits");
                 courseItem.description = (String) courseResultsObj.get("description");
 
-                ArrayList<CourseItem> courseResultsSections = new ArrayList<CourseItem>();
-                JSONArray courseResultsSectionsJSON = courseResultsObj.getJSONArray("sections");
-                for(int j=0; j<courseResultsSectionsJSON.length(); j++) {
-                    JSONObject courseSectionObj = courseResultsSectionsJSON.getJSONObject(j);
-                    courseItem.courseSection = (String) courseSectionObj.get("term");
-                    Log.d(TAG, "courseSection = " + courseItem.courseSection);
+                ArrayList<SectionItem> sectionResults = new ArrayList<SectionItem>();
+                JSONArray sectionResultsJSON = courseResultsObj.getJSONArray("sections");
+                for(int j=0; j<sectionResultsJSON.length(); j++) {
+                    SectionItem sectionItem = new SectionItem();
+
+                    JSONObject courseSectionObj = sectionResultsJSON.getJSONObject(j);
+                    sectionItem.courseSection = (String) courseSectionObj.get("term");
+                    Log.d(TAG, "courseSection = " + sectionItem.courseSection);
                 }
-                //courseItem.buildingCode = (String) courseResultsObj.get("buildingCode");
-                //courseItem.roomNumber = (String) courseResultsObj.get("roomNumber");
+
 
                 courseResultsList.add(courseItem);
             }

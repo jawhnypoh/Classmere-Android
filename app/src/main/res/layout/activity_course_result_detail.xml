@@ -34,13 +34,15 @@
         android:textSize="15sp"
         android:textColor="#000" />
 
-    <TextView
-        android:id="@+id/tv_course_sections"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:padding="4dp"
-        android:textSize="15sp"
-        android:textColor="#000" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_section_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
 </LinearLayout>
