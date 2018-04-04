@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
 
+import java.util.ArrayList;
+
 /**
  * Created by poj on 3/20/18.
  */
@@ -27,6 +29,8 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
 
     private ClassmereUtils.CourseItem mCourseItem;
 
+    private String searchQuery = "cs";
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_result_detail);
@@ -42,7 +46,6 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
             mTVCourseResultTitle.setText(mCourseItem.className);
             mTVCouresResultDescription.setText(mCourseItem.description);
             mTVCourseResultCredits.setText(mCourseItem.credits + " Credits");
-            //mTVCourseResultSections.setText(mCourseItem.courseSection);
         }
 
         mSectionResultsRV = (RecyclerView)findViewById(R.id.rv_section_results);
@@ -52,6 +55,9 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
 
         mCourseSectionAdapter = new CourseSectionAdapter(this);
         mSectionResultsRV.setAdapter(mCourseSectionAdapter);
+
+        ArrayList<ClassmereUtils.CourseItem> courseItems = ClassmereUtils.parseCourseJSON(searchQuery);
+        mCourseSectionAdapter.updateCourseSectionItems(courseItems);
     }
 
     @Override

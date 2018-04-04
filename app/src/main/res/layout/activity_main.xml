@@ -8,21 +8,31 @@
     android:padding="8sp"
     tools:context="com.example.classmere.classmere.MainActivity">
 
-    <EditText
-        android:id="@+id/et_search_box"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:hint="Search Courses..."
-        android:inputType="text"
-        android:imeOptions="actionSearch"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:textSize="22sp"/>
+        <EditText
+            android:id="@+id/et_search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:hint="Search Courses..."
+            android:inputType="text"
+            android:imeOptions="actionSearch"/>
+
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingTop="6sp"
+            android:background="@null"
+            android:src="@drawable/ic_action_search" />
+
+    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"

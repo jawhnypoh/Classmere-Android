@@ -1,9 +1,6 @@
 package com.example.classmere.classmere;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Network;
-import android.os.AsyncTask;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -18,17 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
-import com.example.classmere.classmere.Utilities.NetworkUtils;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CourseAdapter.OnCourseItemClickListener, LoaderManager.LoaderCallbacks<String> {
@@ -44,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
     private TextView mLoadingErrorMessage;
     private RecyclerView mSearchResultsRV;
     private CourseAdapter mCourseAdapter;
+    private CourseSectionAdapter mCourseSectionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
         mCourseAdapter = new CourseAdapter(this);
         mSearchResultsRV.setAdapter(mCourseAdapter);
 
-        Button searchButton = (Button) findViewById(R.id.btn_search);
+        ImageButton searchButton = (ImageButton) findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
