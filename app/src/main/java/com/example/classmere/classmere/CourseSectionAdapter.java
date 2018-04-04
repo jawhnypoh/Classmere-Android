@@ -40,8 +40,8 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
 
     @Override
     public CourseSectionItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflator = LayoutInflater.from(parent.getContext());
-        View itemView = inflator.inflate(R.layout.section_result_item, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View itemView = inflater.inflate(R.layout.section_result_item, parent, false);
         return new CourseSectionItemViewHolder(itemView);
     }
 

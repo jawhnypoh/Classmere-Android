@@ -104,7 +104,6 @@ public class ClassmereUtils {
                     Log.d(TAG, "courseSection = " + sectionItem.courseSection);
                 }
 
-
                 courseResultsList.add(courseItem);
             }
 
