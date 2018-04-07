@@ -45,14 +45,17 @@ public class ClassmereUtils {
         public String className;
         public String credits;
         public String description;
-    }
 
-    public static class SectionItem implements Serializable {
-        public static final String EXTRA_SECTION_ITEM = "com.example.classmere.classmere.utils.SectionItem.SearchResult";
+        public static class SectionItem implements Serializable {
+            public static final String EXTRA_SECTION_ITEM = "com.example.classmere.classmere.utils.SectionItem.SearchResult";
 
-        public String courseSection;
-        public String buildingCode;
-        public String roomNumber;
+            public String courseTerm;
+            public String courseSession;
+            public int courseCrn;
+            public String courseInstructor;
+            public String buildingCode;
+            public String roomNumber;
+        }
     }
 
     public static String buildClassmereURL(String searchQuery) {
@@ -94,14 +97,16 @@ public class ClassmereUtils {
                 courseItem.credits = (String) courseResultsObj.get("credits");
                 courseItem.description = (String) courseResultsObj.get("description");
 
-                ArrayList<SectionItem> sectionResults = new ArrayList<SectionItem>();
+                ArrayList<CourseItem.SectionItem> sectionResults = new ArrayList<CourseItem.SectionItem>();
                 JSONArray sectionResultsJSON = courseResultsObj.getJSONArray("sections");
                 for(int j=0; j<sectionResultsJSON.length(); j++) {
-                    SectionItem sectionItem = new SectionItem();
+                    CourseItem.SectionItem sectionItem = new CourseItem.SectionItem();
 
                     JSONObject courseSectionObj = sectionResultsJSON.getJSONObject(j);
-                    sectionItem.courseSection = (String) courseSectionObj.get("term");
-                    Log.d(TAG, "courseSection = " + sectionItem.courseSection);
+                    sectionItem.courseTerm = (String) courseSectionObj.get("term");
+                    sectionItem.courseSession = (String) courseSectionObj.get("session");
+                    sectionItem.courseCrn = (int) courseSectionObj.get("crn");
+                    Log.d(TAG, "courseTerm = " + sectionItem.courseTerm);
                 }
 
                 courseResultsList.add(courseItem);
