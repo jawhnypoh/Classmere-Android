@@ -99,7 +99,7 @@ public class ClassmereUtils {
                 courseItem.credits = (String) courseResultsObj.get("credits");
                 courseItem.description = (String) courseResultsObj.get("description");
 
-                ArrayList<CourseItem.SectionItem> sectionResults = new ArrayList<CourseItem.SectionItem>();
+                ArrayList<CourseItem.SectionItem> sectionResultsList = new ArrayList<CourseItem.SectionItem>();
                 JSONArray sectionResultsJSON = courseResultsObj.getJSONArray("sections");
                 for(int j=0; j<sectionResultsJSON.length(); j++) {
                     CourseItem.SectionItem sectionItem = new CourseItem.SectionItem();
@@ -108,7 +108,9 @@ public class ClassmereUtils {
                     sectionItem.courseTerm = (String) courseSectionObj.get("term");
                     sectionItem.courseSession = (String) courseSectionObj.get("session");
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
-                    Log.d(TAG, "courseTerm = " + sectionItem.courseTerm);
+                    Log.d(TAG, "courseCrn = " + sectionItem.courseCrn);
+
+                    sectionResultsList.add(sectionItem);
                 }
 
                 courseResultsList.add(courseItem);
