@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class detailedCourseResultActivity extends AppCompatActivity implements CourseSectionAdapter.OnCourseSectionItemClickListener {
 
-    private static final String TAG = "detailedCourseResultActivity: ";
+    private static final String TAG = "detailedCourseActivity: ";
 
     private TextView mTVCourseResultTitle;
     private TextView mTVCourseResultCredits;
@@ -56,10 +57,11 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         mCourseSectionAdapter = new CourseSectionAdapter(this);
         mSectionResultsRV.setAdapter(mCourseSectionAdapter);
 
-//        ArrayList<ClassmereUtils.CourseItem> courseItems = ClassmereUtils.parseCourseJSON(searchQuery);
-//        for(int i=0; i<courseItems.size(); i++) {
-//            mCourseSectionAdapter.updateCourseSectionItems(courseItems.get(i).sectionItems);
-//        }
+        mCourseSectionAdapter.updateCourseSectionItems(mCourseItem.sectionItems);
+        Log.d(TAG, "sectionItems size is: " + mCourseItem.sectionItems.size());
+        for(int i=0; i<mCourseItem.sectionItems.size(); i++) {
+            Log.d(TAG, "courseCrn is: " + mCourseItem.sectionItems.get(i).courseCrn);
+        }
     }
 
     @Override

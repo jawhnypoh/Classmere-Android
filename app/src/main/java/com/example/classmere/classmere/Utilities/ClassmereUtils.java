@@ -57,7 +57,7 @@ public class ClassmereUtils {
             public String roomNumber;
         }
 
-        public static ArrayList<SectionItem> sectionItems;
+        public static ArrayList<SectionItem> sectionItems = new ArrayList<SectionItem>();
     }
 
     public static String buildClassmereURL(String searchQuery) {

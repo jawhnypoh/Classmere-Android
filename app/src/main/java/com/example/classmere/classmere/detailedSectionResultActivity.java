@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class detailedSectionResultActivity extends AppCompatActivity {
 
-    private static final String TAG = "detailedSectionResultActivity: ";
+    private static final String TAG = "detailedSectionActivity: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
