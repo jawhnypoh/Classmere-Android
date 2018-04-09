@@ -55,6 +55,10 @@ public class ClassmereUtils {
             public String courseInstructor;
             public String buildingCode;
             public String roomNumber;
+
+            public String getCourseTerm() {
+                return courseTerm;
+            }
         }
 
         public static ArrayList<SectionItem> sectionItems = new ArrayList<SectionItem>();
@@ -99,6 +103,8 @@ public class ClassmereUtils {
                 courseItem.credits = (String) courseResultsObj.get("credits");
                 courseItem.description = (String) courseResultsObj.get("description");
 
+                courseResultsList.add(courseItem);
+
                 ArrayList<CourseItem.SectionItem> sectionResultsList = new ArrayList<CourseItem.SectionItem>();
                 JSONArray sectionResultsJSON = courseResultsObj.getJSONArray("sections");
                 for(int j=0; j<sectionResultsJSON.length(); j++) {
@@ -108,12 +114,15 @@ public class ClassmereUtils {
                     sectionItem.courseTerm = (String) courseSectionObj.get("term");
                     sectionItem.courseSession = (String) courseSectionObj.get("session");
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
-                    Log.d(TAG, "courseCrn = " + sectionItem.courseCrn);
 
-                    sectionResultsList.add(sectionItem);
+                    courseResultsList.get(i).sectionItems.add(sectionItem);
+
+                    Log.d(TAG, "sectionItems courseTerm is: " + courseResultsList.get(i).sectionItems.get(j).courseTerm);
+
+                    //sectionResultsList.add(sectionItem);
                 }
 
-                courseResultsList.add(courseItem);
+//                courseResultsList.add(courseItem);
             }
 
             return courseResultsList;

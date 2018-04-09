@@ -157,14 +157,6 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
             mSearchResultsRV.setVisibility(View.VISIBLE);
             ArrayList<ClassmereUtils.CourseItem> courseItems = ClassmereUtils.parseCourseJSON(data);
             mCourseAdapter.updateCourseItems(courseItems);
-            Log.d(TAG, "courseItems size: " + courseItems.size());
-            for(int i=0; i<courseItems.size(); i++) {
-                Log.d(TAG, "courseItems.sectionItems size: " + courseItems.get(i).sectionItems.size());
-
-                for(int j=0; j<courseItems.get(i).sectionItems.size(); j++) {
-                    Log.d(TAG, "courseItems.sectionItems.courseCrn is: " + courseItems.get(i).sectionItems.get(j).courseCrn);
-                }
-            }
         }
         else {
             mSearchResultsRV.setVisibility(View.INVISIBLE);

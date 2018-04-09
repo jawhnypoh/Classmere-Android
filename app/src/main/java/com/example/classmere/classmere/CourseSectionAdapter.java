@@ -78,7 +78,7 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
         }
 
         public void bind(ClassmereUtils.CourseItem.SectionItem sectionItem) {
-            mCourseSectionResultTV.setText(sectionItem.courseCrn);
+            mCourseSectionResultTV.setText(sectionItem.courseTerm);
         }
     }
 }
