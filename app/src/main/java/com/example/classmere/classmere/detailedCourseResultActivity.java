@@ -58,10 +58,7 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         mSectionResultsRV.setAdapter(mCourseSectionAdapter);
 
         mCourseSectionAdapter.updateCourseSectionItems(mCourseItem.sectionItems);
-        Log.d(TAG, "sectionItems size is: " + mCourseItem.sectionItems.size());
-        for(int i=0; i<mCourseItem.sectionItems.size(); i++) {
-            Log.d(TAG, "courseCrn is: " + mCourseItem.sectionItems.get(i).courseCrn);
-        }
+
     }
 
     @Override

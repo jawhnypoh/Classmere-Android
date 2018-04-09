@@ -25,6 +25,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.classmere.classmere.MainActivity" />
         </activity>
+        <activity
+            android:name=".detailedSectionResultActivity"
+            android:parentActivityName=".detailedSectionResultActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.classmere.classmere.detailedCourseResultActivity" />
+        </activity>
         <activity android:name=".AboutActivity"></activity>
     </application>
 

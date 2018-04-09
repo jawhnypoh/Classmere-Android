@@ -22,6 +22,7 @@ public class ClassmereUtils {
     private static final String TAG = "ClassmereUtils: ";
 
     public static final String EXTRA_COURSE_RESULT = "ClassmereUtils.CourseResult";
+    public static final String EXTRA_SECTION_RESULT = "ClassmereUtils.SectionResult";
 
 
     public final static String CLASSMERE_BASE_URL = "http://api.classmere.com/";
@@ -114,10 +115,11 @@ public class ClassmereUtils {
                     sectionItem.courseTerm = (String) courseSectionObj.get("term");
                     sectionItem.courseSession = (String) courseSectionObj.get("session");
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
+                    sectionItem.courseInstructor = (String) courseSectionObj.get("instructor");
+
+                    Log.d(TAG, "instructor for " + courseItem.className + ": " + sectionItem.courseInstructor);
 
                     courseResultsList.get(i).sectionItems.add(sectionItem);
-
-                    Log.d(TAG, "sectionItems courseTerm is: " + courseResultsList.get(i).sectionItems.get(j).courseTerm);
 
                     //sectionResultsList.add(sectionItem);
                 }
