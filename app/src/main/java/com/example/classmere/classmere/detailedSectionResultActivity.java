@@ -39,9 +39,14 @@ public class detailedSectionResultActivity extends AppCompatActivity {
 //            mTVSectionResultCredits.setText(mCourseItem.credits + " Credits");
 //        }
 
-        if(intent != null && intent.hasExtra(ClassmereUtils.EXTRA_SECTION_RESULT)) {
+//        if(intent != null && intent.hasExtra(ClassmereUtils.EXTRA_SECTION_RESULT)) {
+//            mSectionItem = (ClassmereUtils.CourseItem.SectionItem) intent.getSerializableExtra(ClassmereUtils.EXTRA_SECTION_RESULT);
+//            mTVSectionResultInstructor.setText("Instructor: " + mSectionItem.courseInstructor);
+//        }
+        if(intent != null) {
             mSectionItem = (ClassmereUtils.CourseItem.SectionItem) intent.getSerializableExtra(ClassmereUtils.EXTRA_SECTION_RESULT);
-            mTVSectionResultInstructor.setText("Instructor: " + mSectionItem.courseInstructor);
+            //mTVSectionResultInstructor.setText("Instructor: " + mSectionItem.courseInstructor);
+            Log.d(TAG, "instructor: " + mSectionItem.courseInstructor);
         }
         else {
             Log.d(TAG, "if statement conditions not met ");
