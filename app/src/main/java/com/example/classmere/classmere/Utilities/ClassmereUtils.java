@@ -56,6 +56,8 @@ public class ClassmereUtils {
             public String buildingCode;
             public String roomNumber;
         }
+
+        public static ArrayList<SectionItem> sectionItems;
     }
 
     public static String buildClassmereURL(String searchQuery) {
@@ -121,5 +123,4 @@ public class ClassmereUtils {
             return null;
         }
     }
-
 }

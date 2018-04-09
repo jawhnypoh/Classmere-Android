@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdapter.CourseSectionItemViewHolder> {
 
-    private ArrayList<ClassmereUtils.CourseItem> mCourseResultsList;
+    private ArrayList<ClassmereUtils.CourseItem.SectionItem> mSectionsResultsList;
 
     private static final String TAG = "CourseSectionAdapter: ";
 
@@ -26,15 +26,15 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
     private Context mContext;
 
     public interface OnCourseSectionItemClickListener {
-        void onCourseSectionItemClick(ClassmereUtils.CourseItem courseItem);
+        void onCourseSectionItemClick(ClassmereUtils.CourseItem.SectionItem sectionItem);
     }
 
     public CourseSectionAdapter(OnCourseSectionItemClickListener clickListener) {
         mCourseSectionItemClickListener = clickListener;
     }
 
-    public void updateCourseSectionItems(ArrayList<ClassmereUtils.CourseItem> courseItems) {
-        mCourseResultsList = courseItems;
+    public void updateCourseSectionItems(ArrayList<ClassmereUtils.CourseItem.SectionItem> sectionItems) {
+        mSectionsResultsList = sectionItems;
         notifyDataSetChanged();
     }
 
@@ -47,13 +47,13 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
 
     @Override
     public void onBindViewHolder(CourseSectionItemViewHolder holder, int position) {
-        holder.bind(mCourseResultsList.get(position));
+        holder.bind(mSectionsResultsList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if(mCourseResultsList != null) {
-            return mCourseResultsList.size();
+        if(mSectionsResultsList != null) {
+            return mSectionsResultsList.size();
         }
         else {
             return 0;
@@ -71,14 +71,14 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ClassmereUtils.CourseItem courseItem = mCourseResultsList.get(getAdapterPosition());
-                    mCourseSectionItemClickListener.onCourseSectionItemClick(courseItem);
+                    ClassmereUtils.CourseItem.SectionItem sectionItem = mSectionsResultsList.get(getAdapterPosition());
+                    mCourseSectionItemClickListener.onCourseSectionItemClick(sectionItem);
                 }
             });
         }
 
-        public void bind(ClassmereUtils.CourseItem courseItem) {
-            mCourseSectionResultTV.setText(courseItem.className);
+        public void bind(ClassmereUtils.CourseItem.SectionItem sectionItem) {
+            mCourseSectionResultTV.setText(sectionItem.courseCrn);
         }
     }
 }

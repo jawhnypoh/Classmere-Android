@@ -56,14 +56,16 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         mCourseSectionAdapter = new CourseSectionAdapter(this);
         mSectionResultsRV.setAdapter(mCourseSectionAdapter);
 
-        ArrayList<ClassmereUtils.CourseItem> courseItems = ClassmereUtils.parseCourseJSON(searchQuery);
-        mCourseSectionAdapter.updateCourseSectionItems(courseItems);
+//        ArrayList<ClassmereUtils.CourseItem> courseItems = ClassmereUtils.parseCourseJSON(searchQuery);
+//        for(int i=0; i<courseItems.size(); i++) {
+//            mCourseSectionAdapter.updateCourseSectionItems(courseItems.get(i).sectionItems);
+//        }
     }
 
     @Override
-    public void onCourseSectionItemClick(ClassmereUtils.CourseItem courseItem) {
+    public void onCourseSectionItemClick(ClassmereUtils.CourseItem.SectionItem sectionItem) {
         Intent detailedSectionResultIntent = new Intent(this, detailedSectionResultActivity.class);
-        detailedSectionResultIntent.putExtra(ClassmereUtils.EXTRA_COURSE_RESULT, courseItem);
+        detailedSectionResultIntent.putExtra(ClassmereUtils.EXTRA_COURSE_RESULT, sectionItem);
         startActivity(detailedSectionResultIntent);
     }
 }
