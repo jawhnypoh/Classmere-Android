@@ -11,7 +11,11 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
 /**
  * Created by poj on 3/15/18.
@@ -58,6 +62,10 @@ public class ClassmereUtils {
             public int courseCrn;
             public String courseInstructor;
             public String sectionType;
+
+            public String meetingDays;
+            public String startTime;
+            public String endTime;
             public String buildingCode;
             public String roomNumber;
         }
@@ -117,6 +125,38 @@ public class ClassmereUtils {
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
                     sectionItem.courseInstructor = (String) courseSectionObj.get("instructor");
                     sectionItem.sectionType = (String) courseSectionObj.get("type");
+
+                    if(!courseSectionObj.isNull("meetingTimes")) {
+                        JSONArray meetingResultsJSON = courseSectionObj.getJSONArray("meetingTimes");
+                        for(int k=0; k<meetingResultsJSON.length(); k++) {
+
+                            JSONObject courseMeetingObj = meetingResultsJSON.getJSONObject(k);
+                            sectionItem.meetingDays = (String) courseMeetingObj.get("days");
+                            sectionItem.buildingCode = (String) courseMeetingObj.get("buildingCode");
+                            sectionItem.roomNumber = (String) courseMeetingObj.get("roomNumber").toString();
+                            sectionItem.startTime = (String) courseMeetingObj.get("startTime");
+                            sectionItem.endTime = (String) courseMeetingObj.get("endTime");
+
+                            /* Converting startTime and endTime to HH:mm AA format */
+                            StringTokenizer tk = new StringTokenizer(sectionItem.startTime);
+                            String date = tk.nextToken();
+                            String time = tk.nextToken();
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+                            SimpleDateFormat sdfs = new SimpleDateFormat("hh:mm a");
+                            Date dt;
+
+                            try {
+                                dt = sdf.parse(time);
+                                Log.d(TAG, "dt is: " + dt);
+                            } catch (java.text.ParseException e) {
+                                e.printStackTrace();
+                            }
+
+//                            Log.d(TAG, courseItem.className + " is on " + sectionItem.meetingDays + " with times " +
+//                                    sectionItem.startTime + " - " + sectionItem.endTime);
+                        }
+                    }
 
                     courseItem.sectionItems.add(sectionItem);
                 }

@@ -62,12 +62,18 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
 
     class CourseSectionItemViewHolder extends RecyclerView.ViewHolder {
         private TextView mCourseSectionResultTV;
+        private TextView mSectionDays;
+        private TextView mSectionTimes;
+        private TextView mSectionInstructor;
         private TextView mSectionTypeTV;
 
         public CourseSectionItemViewHolder(View itemView) {
             super(itemView);
 
             mCourseSectionResultTV = (TextView)itemView.findViewById(R.id.tv_course_sections);
+            mSectionDays = (TextView)itemView.findViewById(R.id.tv_section_days);
+            mSectionTimes = (TextView)itemView.findViewById(R.id.tv_section_times);
+            mSectionInstructor = (TextView)itemView.findViewById(R.id.tv_section_instructor);
             mSectionTypeTV = (TextView)itemView.findViewById(R.id.tv_section_type);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +87,9 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
 
         public void bind(ClassmereUtils.CourseItem.SectionItem sectionItem) {
             mCourseSectionResultTV.setText(sectionItem.courseTerm);
+            mSectionDays.setText(sectionItem.meetingDays);
+            mSectionTimes.setText(sectionItem.startTime + " - " + sectionItem.endTime);
+            mSectionInstructor.setText(sectionItem.courseInstructor);
             mSectionTypeTV.setText(sectionItem.sectionType);
         }
     }

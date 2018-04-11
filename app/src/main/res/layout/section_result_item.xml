@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/card_view"
-    card_view:cardCornerRadius="4dp">
+    card_view:cardCornerRadius="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,8 +16,39 @@
             android:id="@+id/tv_course_sections"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:padding="4dp"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_section_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_course_sections"
             android:layout_marginLeft="16dp"
-            android:padding="16dp"
+            android:padding="4dp"
+            android:textSize="15sp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/tv_section_times"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_section_days"
+            android:layout_marginLeft="16dp"
+            android:padding="4dp"
+            android:textSize="15sp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/tv_section_instructor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_section_days"
+            android:layout_marginLeft="16dp"
+            android:padding="4dp"
             android:textSize="15sp"
             android:textColor="#000" />
 
