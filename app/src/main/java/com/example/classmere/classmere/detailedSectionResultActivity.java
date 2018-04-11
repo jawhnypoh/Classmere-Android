@@ -18,9 +18,9 @@ public class detailedSectionResultActivity extends AppCompatActivity {
 
     private TextView mTVSectionResultTitle;
     private TextView mTVSectionResultCredits;
+    private TextView mTVSectionResultDescription;
     private TextView mTVSectionResultInstructor;
 
-    private ClassmereUtils.CourseItem mCourseItem;
     private ClassmereUtils.CourseItem.SectionItem mSectionItem;
 
     @Override
@@ -30,23 +30,16 @@ public class detailedSectionResultActivity extends AppCompatActivity {
 
         mTVSectionResultTitle = (TextView) findViewById(R.id.tv_section_title);
         mTVSectionResultCredits = (TextView) findViewById(R.id.tv_section_credits);
+        mTVSectionResultDescription = (TextView) findViewById(R.id.tv_section_description);
         mTVSectionResultInstructor = (TextView) findViewById(R.id.tv_section_instructor);
 
         Intent intent = getIntent();
-//        if(intent != null && intent.hasExtra(ClassmereUtils.EXTRA_COURSE_RESULT)) {
-//            mCourseItem = (ClassmereUtils.CourseItem) intent.getSerializableExtra(ClassmereUtils.EXTRA_COURSE_RESULT);
-//            mTVSectionResultTitle.setText(mCourseItem.className);
-//            mTVSectionResultCredits.setText(mCourseItem.credits + " Credits");
-//        }
-
-//        if(intent != null && intent.hasExtra(ClassmereUtils.EXTRA_SECTION_RESULT)) {
-//            mSectionItem = (ClassmereUtils.CourseItem.SectionItem) intent.getSerializableExtra(ClassmereUtils.EXTRA_SECTION_RESULT);
-//            mTVSectionResultInstructor.setText("Instructor: " + mSectionItem.courseInstructor);
-//        }
-        if(intent != null) {
+        if(intent != null && intent.hasExtra(ClassmereUtils.EXTRA_SECTION_RESULT)) {
             mSectionItem = (ClassmereUtils.CourseItem.SectionItem) intent.getSerializableExtra(ClassmereUtils.EXTRA_SECTION_RESULT);
-            //mTVSectionResultInstructor.setText("Instructor: " + mSectionItem.courseInstructor);
-            Log.d(TAG, "instructor: " + mSectionItem.courseInstructor);
+            mTVSectionResultTitle.setText(mSectionItem.sectionName);
+            mTVSectionResultCredits.setText(mSectionItem.sectionCredits + " Credits");
+            mTVSectionResultDescription.setText(mSectionItem.sectionDescription);
+            mTVSectionResultInstructor.setText("Instructor: " + mSectionItem.courseInstructor);
         }
         else {
             Log.d(TAG, "if statement conditions not met ");

@@ -23,7 +23,6 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
     private TextView mTVCourseResultTitle;
     private TextView mTVCourseResultCredits;
     private TextView mTVCouresResultDescription;
-    private TextView mTVCourseResultSections;
 
     private RecyclerView mSectionResultsRV;
     private CourseSectionAdapter mCourseSectionAdapter;
@@ -39,7 +38,6 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         mTVCourseResultTitle = (TextView) findViewById(R.id.tv_course_title);
         mTVCourseResultCredits = (TextView) findViewById(R.id.tv_course_credits);
         mTVCouresResultDescription = (TextView) findViewById(R.id.tv_course_description);
-        mTVCourseResultSections = (TextView) findViewById(R.id.tv_course_sections);
 
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra(ClassmereUtils.EXTRA_COURSE_RESULT)) {
@@ -58,13 +56,12 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         mSectionResultsRV.setAdapter(mCourseSectionAdapter);
 
         mCourseSectionAdapter.updateCourseSectionItems(mCourseItem.sectionItems);
-
     }
 
     @Override
     public void onCourseSectionItemClick(ClassmereUtils.CourseItem.SectionItem sectionItem) {
         Intent detailedSectionResultIntent = new Intent(this, detailedSectionResultActivity.class);
-        detailedSectionResultIntent.putExtra(ClassmereUtils.EXTRA_COURSE_RESULT, sectionItem);
+        detailedSectionResultIntent.putExtra(ClassmereUtils.EXTRA_SECTION_RESULT, sectionItem);
         startActivity(detailedSectionResultIntent);
     }
 }

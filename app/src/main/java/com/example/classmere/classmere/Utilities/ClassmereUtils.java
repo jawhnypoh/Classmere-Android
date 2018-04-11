@@ -50,16 +50,15 @@ public class ClassmereUtils {
         public static class SectionItem implements Serializable {
             public static final String EXTRA_SECTION_ITEM = "com.example.classmere.classmere.utils.SectionItem.SearchResult";
 
+            public String sectionName;
+            public String sectionDescription;
+            public String sectionCredits;
             public String courseTerm;
             public String courseSession;
             public int courseCrn;
             public String courseInstructor;
             public String buildingCode;
             public String roomNumber;
-
-            public String getCourseTerm() {
-                return courseTerm;
-            }
         }
 
         public static ArrayList<SectionItem> sectionItems = new ArrayList<SectionItem>();
@@ -112,6 +111,9 @@ public class ClassmereUtils {
                     CourseItem.SectionItem sectionItem = new CourseItem.SectionItem();
 
                     JSONObject courseSectionObj = sectionResultsJSON.getJSONObject(j);
+                    sectionItem.sectionName = (String) courseResultsObj.get("title");
+                    sectionItem.sectionCredits = (String) courseResultsObj.get("credits");
+                    sectionItem.sectionDescription = (String) courseResultsObj.get("description");
                     sectionItem.courseTerm = (String) courseSectionObj.get("term");
                     sectionItem.courseSession = (String) courseSectionObj.get("session");
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
@@ -121,10 +123,7 @@ public class ClassmereUtils {
 
                     courseResultsList.get(i).sectionItems.add(sectionItem);
 
-                    //sectionResultsList.add(sectionItem);
                 }
-
-//                courseResultsList.add(courseItem);
             }
 
             return courseResultsList;
