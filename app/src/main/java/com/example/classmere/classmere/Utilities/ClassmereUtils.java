@@ -57,11 +57,12 @@ public class ClassmereUtils {
             public String courseSession;
             public int courseCrn;
             public String courseInstructor;
+            public String sectionType;
             public String buildingCode;
             public String roomNumber;
         }
 
-        public static ArrayList<SectionItem> sectionItems = new ArrayList<SectionItem>();
+        public ArrayList<SectionItem> sectionItems = new ArrayList<SectionItem>();
     }
 
     public static String buildClassmereURL(String searchQuery) {
@@ -103,7 +104,6 @@ public class ClassmereUtils {
                 courseItem.credits = (String) courseResultsObj.get("credits");
                 courseItem.description = (String) courseResultsObj.get("description");
 
-//                ArrayList<CourseItem.SectionItem> sectionResultsList = new ArrayList<CourseItem.SectionItem>();
                 JSONArray sectionResultsJSON = courseResultsObj.getJSONArray("sections");
                 for(int j=0; j<sectionResultsJSON.length(); j++) {
                     CourseItem.SectionItem sectionItem = new CourseItem.SectionItem();
@@ -116,10 +116,9 @@ public class ClassmereUtils {
                     sectionItem.courseSession = (String) courseSectionObj.get("session");
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
                     sectionItem.courseInstructor = (String) courseSectionObj.get("instructor");
+                    sectionItem.sectionType = (String) courseSectionObj.get("type");
 
                     courseItem.sectionItems.add(sectionItem);
-                    Log.d(TAG, "instructor for " + courseItem.className + ": " + sectionItem.courseInstructor);
-
                 }
                 courseResultsList.add(courseItem);
             }

@@ -62,11 +62,13 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
 
     class CourseSectionItemViewHolder extends RecyclerView.ViewHolder {
         private TextView mCourseSectionResultTV;
+        private TextView mSectionTypeTV;
 
         public CourseSectionItemViewHolder(View itemView) {
             super(itemView);
 
             mCourseSectionResultTV = (TextView)itemView.findViewById(R.id.tv_course_sections);
+            mSectionTypeTV = (TextView)itemView.findViewById(R.id.tv_section_type);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,6 +81,7 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
 
         public void bind(ClassmereUtils.CourseItem.SectionItem sectionItem) {
             mCourseSectionResultTV.setText(sectionItem.courseTerm);
+            mSectionTypeTV.setText(sectionItem.sectionType);
         }
     }
 }
