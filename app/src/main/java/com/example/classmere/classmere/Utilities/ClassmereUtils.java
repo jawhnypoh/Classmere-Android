@@ -1,5 +1,6 @@
 package com.example.classmere.classmere.Utilities;
 
+import android.content.pm.PackageManager;
 import android.net.ParseException;
 import android.net.Uri;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
@@ -134,21 +136,17 @@ public class ClassmereUtils {
                             sectionItem.meetingDays = (String) courseMeetingObj.get("days");
                             sectionItem.buildingCode = (String) courseMeetingObj.get("buildingCode");
                             sectionItem.roomNumber = (String) courseMeetingObj.get("roomNumber").toString();
+                            if(sectionItem.roomNumber.isEmpty()) {
+                                sectionItem.roomNumber = " ";
+                            }
                             sectionItem.startTime = (String) courseMeetingObj.get("startTime");
                             sectionItem.endTime = (String) courseMeetingObj.get("endTime");
 
                             /* Converting startTime and endTime to HH:mm AA format */
-                            StringTokenizer tk = new StringTokenizer(sectionItem.startTime);
-                            String date = tk.nextToken();
-                            String time = tk.nextToken();
-
-                            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-                            SimpleDateFormat sdfs = new SimpleDateFormat("hh:mm a");
-                            Date dt;
-
                             try {
-                                dt = sdf.parse(time);
-                                Log.d(TAG, "dt is: " + dt);
+                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                                sdf.parse(sectionItem.startTime);
+                                Log.d(TAG, "startTime is: " + sdf);
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
