@@ -98,11 +98,13 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
             }
 
             mSectionInstructor.setText(sectionItem.courseInstructor);
-            if(sectionItem.buildingCode == null || sectionItem.roomNumber == null) {
+
+            mSectionLocation.setText(sectionItem.buildingCode + " " + sectionItem.roomNumber);
+            if(sectionItem.buildingCode == null) {
                 mSectionLocation.setText(" ");
             }
-            else {
-                mSectionLocation.setText(sectionItem.buildingCode + " " + sectionItem.roomNumber);
+            else if(sectionItem.roomNumber == null) {
+                mSectionLocation.setText(sectionItem.buildingCode);
             }
             mSectionTypeTV.setText(sectionItem.sectionType);
         }

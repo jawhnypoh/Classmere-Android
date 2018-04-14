@@ -101,6 +101,9 @@ public class ClassmereUtils {
 
     public static ArrayList<CourseItem> parseCourseJSON(String courseResultsJSON) {
         try {
+
+            String season, year;
+
             JSONObject courseResultsObj;
             JSONArray courseResultsItems = new JSONArray(courseResultsJSON);
 
@@ -124,6 +127,31 @@ public class ClassmereUtils {
                     sectionItem.sectionCredits = (String) courseResultsObj.get("credits");
                     sectionItem.sectionDescription = (String) courseResultsObj.get("description");
                     sectionItem.courseTerm = (String) courseSectionObj.get("term");
+
+                    /* Checking term appending full term name and year */
+                    season = sectionItem.courseTerm;
+                    year = season.substring(season.length() - 2);
+
+                    String parsedTerm = "";
+
+                    if(season.contains("F")) {
+                        parsedTerm += "Fall";
+                    }
+                    else if(season.contains("W")) {
+                        parsedTerm += "Winter";
+                    }
+                    else if(season.contains("Sp")) {
+                        parsedTerm += "Spring";
+                    }
+                    else if(season.contains("Su")) {
+                        parsedTerm += "Summer";
+                    }
+
+                    if(year != null) {
+                        parsedTerm += " 20" + year;
+                    }
+                    sectionItem.courseTerm = parsedTerm;
+
                     sectionItem.courseSession = (String) courseSectionObj.get("session");
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
                     sectionItem.courseInstructor = (String) courseSectionObj.get("instructor");
@@ -132,8 +160,6 @@ public class ClassmereUtils {
                     if(!courseSectionObj.isNull("meetingTimes")) {
                         JSONArray meetingResultsJSON = courseSectionObj.getJSONArray("meetingTimes");
                         for(int k=0; k<meetingResultsJSON.length(); k++) {
-
-                            DateFormat df = DateFormat.getDateTimeInstance();
 
                             JSONObject courseMeetingObj = meetingResultsJSON.getJSONObject(k);
                             sectionItem.meetingDays = (String) courseMeetingObj.get("days");
@@ -145,17 +171,16 @@ public class ClassmereUtils {
                             sectionItem.startTime = (String) courseMeetingObj.get("startTime");
                             sectionItem.endTime = (String) courseMeetingObj.get("endTime");
 
-                            /* Converting startTime and endTime to HH:mm AA format */
+                            /* Converting startTime and endTime to hh:mm a format */
                             try {
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                                SimpleDateFormat sdfOutput = new SimpleDateFormat("hh:mm a");
+                                SimpleDateFormat sdfOutput = new SimpleDateFormat("h:mm a");
                                 Date newStartTime = sdf.parse(sectionItem.startTime);
                                 Date newEndTime = sdf.parse(sectionItem.endTime);
 
                                 sectionItem.startTime = sdfOutput.format(newStartTime);
                                 sectionItem.endTime = sdfOutput.format(newEndTime);
 
-                                Log.d(TAG, "startTime is: " + sectionItem.startTime + " and endTime is: " + sectionItem.endTime);
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
