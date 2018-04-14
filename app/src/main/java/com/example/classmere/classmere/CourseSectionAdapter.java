@@ -90,9 +90,20 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
         public void bind(ClassmereUtils.CourseItem.SectionItem sectionItem) {
             mCourseSectionResultTV.setText(sectionItem.courseTerm);
             mSectionDays.setText(sectionItem.meetingDays);
-            mSectionTimes.setText(sectionItem.startTime + " - " + sectionItem.endTime);
+            if(sectionItem.startTime == null || sectionItem.endTime == null) {
+                mSectionTimes.setText(" ");
+            }
+            else {
+                mSectionTimes.setText(sectionItem.startTime + " - " + sectionItem.endTime);
+            }
+
             mSectionInstructor.setText(sectionItem.courseInstructor);
-            mSectionLocation.setText(sectionItem.buildingCode + " " + sectionItem.roomNumber);
+            if(sectionItem.buildingCode == null || sectionItem.roomNumber == null) {
+                mSectionLocation.setText(" ");
+            }
+            else {
+                mSectionLocation.setText(sectionItem.buildingCode + " " + sectionItem.roomNumber);
+            }
             mSectionTypeTV.setText(sectionItem.sectionType);
         }
     }
