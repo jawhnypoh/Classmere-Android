@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -132,6 +133,8 @@ public class ClassmereUtils {
                         JSONArray meetingResultsJSON = courseSectionObj.getJSONArray("meetingTimes");
                         for(int k=0; k<meetingResultsJSON.length(); k++) {
 
+                            DateFormat df = DateFormat.getDateTimeInstance();
+
                             JSONObject courseMeetingObj = meetingResultsJSON.getJSONObject(k);
                             sectionItem.meetingDays = (String) courseMeetingObj.get("days");
                             sectionItem.buildingCode = (String) courseMeetingObj.get("buildingCode");
@@ -144,9 +147,15 @@ public class ClassmereUtils {
 
                             /* Converting startTime and endTime to HH:mm AA format */
                             try {
-                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                                sdf.parse(sectionItem.startTime);
-                                Log.d(TAG, "startTime is: " + sdf);
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                                SimpleDateFormat sdfOutput = new SimpleDateFormat("hh:mm a");
+                                Date newStartTime = sdf.parse(sectionItem.startTime);
+                                Date newEndTime = sdf.parse(sectionItem.endTime);
+
+                                sectionItem.startTime = sdfOutput.format(newStartTime);
+                                sectionItem.endTime = sdfOutput.format(newEndTime);
+
+                                Log.d(TAG, "startTime is: " + sectionItem.startTime + " and endTime is: " + sectionItem.endTime);
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
