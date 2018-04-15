@@ -18,7 +18,8 @@
         android:id="@+id/tv_course_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
         android:layout_marginLeft="12dp"
         android:textSize="20sp"
         android:textColor="#000" />
@@ -27,7 +28,7 @@
         android:id="@+id/tv_course_credits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="4dp"
+        android:paddingLeft="4dp"
         android:layout_marginLeft="16dp"
         android:textSize="15sp"
         android:textColor="#000" />
@@ -36,6 +37,7 @@
         android:id="@+id/tv_course_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp"
         android:padding="4dp"
         android:textSize="15sp"

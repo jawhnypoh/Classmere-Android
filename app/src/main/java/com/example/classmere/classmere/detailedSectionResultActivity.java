@@ -26,6 +26,8 @@ public class detailedSectionResultActivity extends AppCompatActivity {
     private TextView mTVSectionResultInstructor;
     private TextView mTVSectionResultLocation;
     private TextView mTVSectionResultType;
+    private TextView mTVSectionResultEnrollment;
+    private TextView mTvSectionResultDates;
     private TextView mTVSectionResultCrn;
 
     private ClassmereUtils.CourseItem.SectionItem mSectionItem;
@@ -43,6 +45,8 @@ public class detailedSectionResultActivity extends AppCompatActivity {
         mTVSectionResultMeetingTime = (TextView) findViewById(R.id.tv_section_meeting_time);
         mTVSectionResultLocation = (TextView) findViewById(R.id.tv_section_location);
         mTVSectionResultType = (TextView) findViewById(R.id.tv_section_type);
+        mTVSectionResultEnrollment = (TextView) findViewById(R.id.tv_section_enrollment);
+        mTvSectionResultDates = (TextView) findViewById(R.id.tv_section_dates);
         mTVSectionResultCrn = (TextView) findViewById(R.id.tv_section_crn);
 
         Intent intent = getIntent();
@@ -62,6 +66,8 @@ public class detailedSectionResultActivity extends AppCompatActivity {
                 mTVSectionResultLocation.setText("No Location Specified ");
             }
             mTVSectionResultType.setText("Type: " + mSectionItem.sectionType);
+            mTVSectionResultEnrollment.setText("Enrollment: " + mSectionItem.enrollmentCurr + " student(s) enrolled, " + mSectionItem.enrollmentLeft + " spots left ");
+            mTvSectionResultDates.setText("Dates: " + mSectionItem.startDate + " - " + mSectionItem.endDate);
             mTVSectionResultCrn.setText("CRN: " + mSectionItem.courseCrn);
         }
         else {

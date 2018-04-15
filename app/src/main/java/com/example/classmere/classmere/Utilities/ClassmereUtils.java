@@ -65,10 +65,15 @@ public class ClassmereUtils {
             public int courseCrn;
             public String courseInstructor;
             public String sectionType;
+            public int enrollmentCap;
+            public int enrollmentCurr;
+            public int enrollmentLeft;
 
             public String meetingDays;
             public String startTime;
             public String endTime;
+            public String startDate;
+            public String endDate;
             public String buildingCode;
             public String roomNumber;
         }
@@ -156,6 +161,9 @@ public class ClassmereUtils {
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
                     sectionItem.courseInstructor = (String) courseSectionObj.get("instructor");
                     sectionItem.sectionType = (String) courseSectionObj.get("type");
+                    sectionItem.enrollmentCap = (int) courseSectionObj.get("enrollmentCapacity");
+                    sectionItem.enrollmentCurr = (int) courseSectionObj.get("enrollmentCurrent");
+                    sectionItem.enrollmentLeft = sectionItem.enrollmentCap - sectionItem.enrollmentCurr;
 
                     if(!courseSectionObj.isNull("meetingTimes")) {
                         JSONArray meetingResultsJSON = courseSectionObj.getJSONArray("meetingTimes");
@@ -174,19 +182,26 @@ public class ClassmereUtils {
                             /* Converting startTime and endTime to hh:mm a format */
                             try {
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                                SimpleDateFormat sdfOutput = new SimpleDateFormat("h:mm a");
+                                SimpleDateFormat timeOutput = new SimpleDateFormat("h:mm a");
+                                SimpleDateFormat dateOutput = new SimpleDateFormat("MM/dd/yy");
+
                                 Date newStartTime = sdf.parse(sectionItem.startTime);
                                 Date newEndTime = sdf.parse(sectionItem.endTime);
 
-                                sectionItem.startTime = sdfOutput.format(newStartTime);
-                                sectionItem.endTime = sdfOutput.format(newEndTime);
+                                sectionItem.startTime = timeOutput.format(newStartTime);
+                                sectionItem.endTime = timeOutput.format(newEndTime);
+
+//                                if(sectionItem.startTime != null && sectionItem.endTime != null) {
+                                    Date newStartDate = sdf.parse(sectionItem.startTime);
+                                    Date newEndDate = sdf.parse(sectionItem.endTime);
+
+                                    sectionItem.startDate = dateOutput.format(newStartDate);
+                                    sectionItem.endDate = dateOutput.format(newEndDate);
+                                //}
 
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
-
-//                            Log.d(TAG, courseItem.className + " is on " + sectionItem.meetingDays + " with times " +
-//                                    sectionItem.startTime + " - " + sectionItem.endTime);
                         }
                     }
 
