@@ -185,19 +185,18 @@ public class ClassmereUtils {
                                 SimpleDateFormat timeOutput = new SimpleDateFormat("h:mm a");
                                 SimpleDateFormat dateOutput = new SimpleDateFormat("MM/dd/yy");
 
+
                                 Date newStartTime = sdf.parse(sectionItem.startTime);
                                 Date newEndTime = sdf.parse(sectionItem.endTime);
+
+                                Date newStartDate = sdf.parse(sectionItem.startTime);
+                                Date newEndDate = sdf.parse(sectionItem.endTime);
 
                                 sectionItem.startTime = timeOutput.format(newStartTime);
                                 sectionItem.endTime = timeOutput.format(newEndTime);
 
-//                                if(sectionItem.startTime != null && sectionItem.endTime != null) {
-                                    Date newStartDate = sdf.parse(sectionItem.startTime);
-                                    Date newEndDate = sdf.parse(sectionItem.endTime);
-
-                                    sectionItem.startDate = dateOutput.format(newStartDate);
-                                    sectionItem.endDate = dateOutput.format(newEndDate);
-                                //}
+                                sectionItem.startDate = dateOutput.format(newStartDate);
+                                sectionItem.endDate = dateOutput.format(newEndDate);
 
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
