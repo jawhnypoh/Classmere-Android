@@ -9,6 +9,12 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -16,7 +22,7 @@ import java.util.ArrayList;
  * Created by poj on 3/20/18.
  */
 
-public class detailedCourseResultActivity extends AppCompatActivity implements CourseSectionAdapter.OnCourseSectionItemClickListener {
+public class detailedCourseResultActivity extends AppCompatActivity implements CourseSectionAdapter.OnCourseSectionItemClickListener, OnMapReadyCallback {
 
     private static final String TAG = "detailedCourseActivity: ";
 
@@ -56,6 +62,11 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         mSectionResultsRV.setAdapter(mCourseSectionAdapter);
 
         mCourseSectionAdapter.updateCourseSectionItems(mCourseItem.sectionItems);
+
+        // Get SupportMapFragment and request notification when map is ready to be used
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -63,5 +74,14 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         Intent detailedSectionResultIntent = new Intent(this, detailedSectionResultActivity.class);
         detailedSectionResultIntent.putExtra(ClassmereUtils.EXTRA_SECTION_RESULT, sectionItem);
         startActivity(detailedSectionResultIntent);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        // Add marker for Oregon State University, move camera to that location
+        LatLng OSU = new LatLng(44.563704, -123.279474);
+        googleMap.addMarker(new MarkerOptions().position(OSU)
+            .title("Oregon State University"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(OSU));
     }
 }

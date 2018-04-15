@@ -128,7 +128,7 @@ public class ClassmereUtils {
                     sectionItem.sectionDescription = (String) courseResultsObj.get("description");
                     sectionItem.courseTerm = (String) courseSectionObj.get("term");
 
-                    /* Checking term appending full term name and year */
+                    /* Converting term to Term 20-Year format */
                     season = sectionItem.courseTerm;
                     year = season.substring(season.length() - 2);
 
