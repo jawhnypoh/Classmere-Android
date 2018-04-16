@@ -3,6 +3,7 @@ package com.example.classmere.classmere;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,9 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
 
     @Override
     public void onBindViewHolder(CourseSectionItemViewHolder holder, int position) {
-        holder.bind(mSectionsResultsList.get(position));
+        //holder.bind(mSectionsResultsList.get(position));
+        holder.bind(mSectionsResultsList.get(holder.getAdapterPosition()));
+        Log.d(TAG, "holder.getAdapterPosition returns " + holder.getAdapterPosition());
     }
 
     @Override

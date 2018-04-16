@@ -171,7 +171,7 @@ public class ClassmereUtils {
                         JSONArray meetingResultsJSON = courseSectionObj.getJSONArray("meetingTimes");
                         for(int k=0; k<meetingResultsJSON.length(); k++) {
 
-                            JSONObject courseMeetingObj = meetingResultsJSON.getJSONObject(k);
+                            JSONObject courseMeetingObj = meetingResultsJSON.getJSONObject(0);
                             sectionItem.meetingDays = (String) courseMeetingObj.get("days");
                             sectionItem.buildingCode = (String) courseMeetingObj.get("buildingCode");
                             if(sectionItem.buildingCode.equals("TBA")) {
@@ -202,8 +202,6 @@ public class ClassmereUtils {
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
-
-                            Log.d(TAG, "at index " + k + " " + courseItem.className + " has location at " + sectionItem.buildingCode + " " + sectionItem.roomNumber);
                         }
                     }
 
