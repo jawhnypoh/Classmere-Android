@@ -174,10 +174,17 @@ public class ClassmereUtils {
                             JSONObject courseMeetingObj = meetingResultsJSON.getJSONObject(k);
                             sectionItem.meetingDays = (String) courseMeetingObj.get("days");
                             sectionItem.buildingCode = (String) courseMeetingObj.get("buildingCode");
-                            sectionItem.roomNumber = (String) courseMeetingObj.get("roomNumber").toString();
-                            if(sectionItem.roomNumber.isEmpty()) {
-                                sectionItem.roomNumber = " ";
+                            if(sectionItem.buildingCode.equals("TBA")) {
+                                sectionItem.roomNumber = "";
                             }
+                            else {
+                                sectionItem.roomNumber = (String) courseMeetingObj.get("roomNumber").toString();
+
+                                if(sectionItem.roomNumber.equals("null")) {
+                                    sectionItem.roomNumber = "";
+                                }
+                            }
+
                             sectionItem.startTime = (String) courseMeetingObj.get("startTime");
                             sectionItem.endTime = (String) courseMeetingObj.get("endTime");
 
@@ -195,6 +202,8 @@ public class ClassmereUtils {
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
+
+                            Log.d(TAG, "at index " + k + " " + courseItem.className + " has location at " + sectionItem.buildingCode + " " + sectionItem.roomNumber);
                         }
                     }
 
