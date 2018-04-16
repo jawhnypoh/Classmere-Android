@@ -61,9 +61,12 @@ public class detailedSectionResultActivity extends AppCompatActivity {
             if(mSectionItem.meetingDays == null || mSectionItem.startTime == null || mSectionItem.endTime == null) {
                 mTVSectionResultMeetingTime.setText("No Meeting Times Specified ");
             }
-            mTVSectionResultLocation.setText("Location: " + mSectionItem.buildingCode);
+            mTVSectionResultLocation.setText("Location: " + mSectionItem.buildingCode + " " + mSectionItem.roomNumber);
             if(mSectionItem.buildingCode == null) {
                 mTVSectionResultLocation.setText("No Location Specified ");
+            }
+            else if (mSectionItem.roomNumber == null){
+                mSectionItem.roomNumber = "";
             }
             mTVSectionResultType.setText("Type: " + mSectionItem.sectionType);
             mTVSectionResultEnrollment.setText("Enrollment: " + mSectionItem.enrollmentCurr + " student(s) enrolled, " + mSectionItem.enrollmentLeft + " spots left ");

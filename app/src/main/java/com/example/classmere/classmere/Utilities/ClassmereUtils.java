@@ -160,6 +160,8 @@ public class ClassmereUtils {
                     sectionItem.courseSession = (String) courseSectionObj.get("session");
                     sectionItem.courseCrn = (int) courseSectionObj.get("crn");
                     sectionItem.courseInstructor = (String) courseSectionObj.get("instructor");
+                    sectionItem.startDate = (String) courseSectionObj.get("startDate");
+                    sectionItem.endDate = (String) courseSectionObj.get("endDate");
                     sectionItem.sectionType = (String) courseSectionObj.get("type");
                     sectionItem.enrollmentCap = (int) courseSectionObj.get("enrollmentCapacity");
                     sectionItem.enrollmentCurr = (int) courseSectionObj.get("enrollmentCurrent");
@@ -183,20 +185,12 @@ public class ClassmereUtils {
                             try {
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                                 SimpleDateFormat timeOutput = new SimpleDateFormat("h:mm a");
-                                SimpleDateFormat dateOutput = new SimpleDateFormat("MM/dd/yy");
-
 
                                 Date newStartTime = sdf.parse(sectionItem.startTime);
                                 Date newEndTime = sdf.parse(sectionItem.endTime);
 
-                                Date newStartDate = sdf.parse(sectionItem.startTime);
-                                Date newEndDate = sdf.parse(sectionItem.endTime);
-
                                 sectionItem.startTime = timeOutput.format(newStartTime);
                                 sectionItem.endTime = timeOutput.format(newEndTime);
-
-                                sectionItem.startDate = dateOutput.format(newStartDate);
-                                sectionItem.endDate = dateOutput.format(newEndDate);
 
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
