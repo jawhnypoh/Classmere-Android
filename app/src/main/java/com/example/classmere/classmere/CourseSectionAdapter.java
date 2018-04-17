@@ -48,9 +48,7 @@ public class CourseSectionAdapter extends RecyclerView.Adapter<CourseSectionAdap
 
     @Override
     public void onBindViewHolder(CourseSectionItemViewHolder holder, int position) {
-        //holder.bind(mSectionsResultsList.get(position));
-        holder.bind(mSectionsResultsList.get(holder.getAdapterPosition()));
-        Log.d(TAG, "holder.getAdapterPosition returns " + holder.getAdapterPosition());
+        holder.bind(mSectionsResultsList.get(position));
     }
 
     @Override

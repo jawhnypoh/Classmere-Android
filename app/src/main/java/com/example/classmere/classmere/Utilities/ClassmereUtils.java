@@ -81,6 +81,15 @@ public class ClassmereUtils {
         public ArrayList<SectionItem> sectionItems = new ArrayList<SectionItem>();
     }
 
+    public static class BuildingItem {
+
+        public String buildingAbbr;
+        public String buildingName;
+        public String buildingAddr;
+        public String buildingLat;
+        public String buildingLong;
+    }
+
     public static String buildClassmereURL(String searchQuery) {
         Uri.Builder builder = Uri.parse(CLASSMERE_BASE_URL).buildUpon();
 
@@ -218,5 +227,9 @@ public class ClassmereUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static BuildingItem parseBuildingJSON(String buildingResultJSON) {
+
     }
 }
