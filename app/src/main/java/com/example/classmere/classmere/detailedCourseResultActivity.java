@@ -34,6 +34,7 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
     private CourseSectionAdapter mCourseSectionAdapter;
 
     private ClassmereUtils.CourseItem mCourseItem;
+    private ClassmereUtils.BuildingItem mBuildingItem;
 
     private String searchQuery = "cs";
 
@@ -78,6 +79,8 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mBuildingItem = ClassmereUtils.parseBuildingJSON("api.classmere.com/buildings/LINC");
+
         // Add marker for Oregon State University, move camera to that location
         LatLng OSU = new LatLng(44.563704, -123.279474);
         googleMap.addMarker(new MarkerOptions().position(OSU)

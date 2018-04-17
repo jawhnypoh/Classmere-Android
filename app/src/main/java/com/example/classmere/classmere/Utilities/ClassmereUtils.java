@@ -9,6 +9,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -229,7 +230,32 @@ public class ClassmereUtils {
         }
     }
 
-//    public static BuildingItem parseBuildingJSON(String buildingResultJSON) {
+    public static BuildingItem parseBuildingJSON(String buildingResultJSON) {
+        try {
+            JSONObject jsonBuilding = new JSONObject(buildingResultJSON);
+            JSONObject buildingResultObj;
+
+            BuildingItem buildingItem = new BuildingItem();
+
+//            Log.d(TAG, "buildingResultObj is: " + buildingResultObj);
 //
-//    }
+//            buildingItem.buildingName = (String) buildingResultObj.get("name").toString();
+//            buildingItem.buildingAbbr = (String) buildingResultObj.get("abbr").toString();
+//            buildingItem.buildingAddr = (String) buildingResultObj.get("address").toString();
+//            buildingItem.buildingLat = (String) buildingResultObj.get("latitude").toString();
+//            buildingItem.buildingLong = (String) buildingResultObj.get("longtitude").toString();
+//
+//            Log.d(TAG, "Building " + buildingItem.buildingName + " has address " + buildingItem.buildingAddr);
+
+            return buildingItem;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }  catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }

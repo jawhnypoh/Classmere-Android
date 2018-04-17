@@ -60,7 +60,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="10dp"
-            android:layout_below="@id/tv_course_sections"
             android:padding="16dp"
             android:textSize="15sp"
             android:textColor="#000" />

@@ -68,7 +68,7 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
             mTVSectionResultDescription.setText(mSectionItem.sectionDescription);
             mTVSectionResultTerm.setText(mSectionItem.courseTerm);
             mTVSectionResultInstructor.setText("Instructor: " + mSectionItem.courseInstructor);
-            mTVSectionResultMeetingTime.setText("Meet:  " + mSectionItem.meetingDays + "  " + mSectionItem.startTime + " - " + mSectionItem.endTime);
+            mTVSectionResultMeetingTime.setText("Meet: " + mSectionItem.meetingDays + "  " + mSectionItem.startTime + " - " + mSectionItem.endTime);
             if(mSectionItem.meetingDays == null || mSectionItem.startTime == null || mSectionItem.endTime == null) {
                 mTVSectionResultMeetingTime.setText("No Meeting Times Specified ");
             }
