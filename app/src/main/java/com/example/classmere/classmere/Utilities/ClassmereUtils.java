@@ -229,7 +229,7 @@ public class ClassmereUtils {
         }
     }
 
-    public static BuildingItem parseBuildingJSON(String buildingResultJSON) {
-
-    }
+//    public static BuildingItem parseBuildingJSON(String buildingResultJSON) {
+//
+//    }
 }
