@@ -234,42 +234,7 @@ public class ClassmereUtils {
         }
     }
 
-    public static JSONObject getBuildingJSON(String buildingCode) {
-        try {
-            URL url = new URL(String.format(buildBuildingURL(buildingCode)));
-
-            Log.d(TAG, "buildingUrl: " + url);
-            //URL url = new URL(String.format(CLASSMERE_BASE_URL, CLASSMERE_BUILDING_BASE, buildingCode));
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-
-            StringBuffer json = new StringBuffer(1024);
-
-            String temp = "";
-
-            while((temp=reader.readLine())!=null)
-                json.append(temp).append("\n");
-            reader.close();
-
-            JSONObject data = new JSONObject(json.toString());
-
-            Log.d(TAG, "data is: " + data);
-
-            // This value will be 404 if the request was not successful
-            if(data.getInt("code") != 200){
-                return null;
-            }
-
-            return data;
-        }
-        catch (Exception e) {
-            return null;
-        }
-    }
-
-    public static BuildingItem parseBuildingJSON(JSONObject buildingResultsJSON) {
+    public static BuildingItem parseBuildingJSON(String buildingResultsJSON) {
         try {
 
             if(buildingResultsJSON != null) {

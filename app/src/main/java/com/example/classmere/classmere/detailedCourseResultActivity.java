@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
+import com.example.classmere.classmere.Utilities.NetworkUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -74,11 +76,18 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
     }
 
     private void doBuildingSearch(String buildingQuery) {
-        //String buildingURL = "LINC";
 
-        JSONObject buildingJSON = ClassmereUtils.getBuildingJSON(buildingQuery.toString());
+        String buildingResults = null;
+        try {
+            buildingResults = NetworkUtils.doHTTPGet(buildingQuery);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        ClassmereUtils.BuildingItem mBuildingItem = ClassmereUtils.parseBuildingJSON(buildingJSON);
+        //JSONObject buildingJSON = ClassmereUtils.getBuildingJSON(buildingQuery.toString());
+
+        ClassmereUtils.BuildingItem mBuildingItem = ClassmereUtils.parseBuildingJSON(buildingResults);
     }
 
     @Override
@@ -90,7 +99,7 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        String data = "LINC";
+        String data = "http://api.classmere.com/buildings/LINC";
 
         doBuildingSearch(data);
 
