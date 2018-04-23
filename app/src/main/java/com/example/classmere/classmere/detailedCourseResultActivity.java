@@ -16,6 +16,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -26,6 +28,8 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
 
     private static final String TAG = "detailedCourseActivity: ";
 
+    private static final String BUILDING_SEARCH_KEY = "buildingSearchURL";
+
     private TextView mTVCourseResultTitle;
     private TextView mTVCourseResultCredits;
     private TextView mTVCouresResultDescription;
@@ -34,7 +38,6 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
     private CourseSectionAdapter mCourseSectionAdapter;
 
     private ClassmereUtils.CourseItem mCourseItem;
-    private ClassmereUtils.BuildingItem mBuildingItem;
 
     private String searchQuery = "cs";
 
@@ -70,6 +73,14 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         mapFragment.getMapAsync(this);
     }
 
+    private void doBuildingSearch(String buildingQuery) {
+        //String buildingURL = "LINC";
+
+        JSONObject buildingJSON = ClassmereUtils.getBuildingJSON(buildingQuery.toString());
+
+        ClassmereUtils.BuildingItem mBuildingItem = ClassmereUtils.parseBuildingJSON(buildingJSON);
+    }
+
     @Override
     public void onCourseSectionItemClick(ClassmereUtils.CourseItem.SectionItem sectionItem) {
         Intent detailedSectionResultIntent = new Intent(this, detailedSectionResultActivity.class);
@@ -79,7 +90,9 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mBuildingItem = ClassmereUtils.parseBuildingJSON("api.classmere.com/buildings/LINC");
+        String data = "LINC";
+
+        doBuildingSearch(data);
 
         // Add marker for Oregon State University, move camera to that location
         LatLng OSU = new LatLng(44.563704, -123.279474);

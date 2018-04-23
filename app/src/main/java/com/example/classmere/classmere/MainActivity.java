@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
     private TextView mLoadingErrorMessage;
     private RecyclerView mSearchResultsRV;
     private CourseAdapter mCourseAdapter;
-    private CourseSectionAdapter mCourseSectionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
     public void onLoadFinished(Loader<String> loader, String data) {
         mLoadingProgressBar.setVisibility(View.INVISIBLE);
 
+        Log.d(TAG, "Data is: " + data);
         Log.d(TAG, "Got results from loader. ");
         if(data != null) {
             mLoadingProgressBar.setVisibility(View.INVISIBLE);

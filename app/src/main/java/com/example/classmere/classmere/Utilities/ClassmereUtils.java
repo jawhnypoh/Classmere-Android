@@ -11,8 +11,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -230,10 +234,52 @@ public class ClassmereUtils {
         }
     }
 
-    public static BuildingItem parseBuildingJSON(String buildingResultJSON) {
+    public static JSONObject getBuildingJSON(String buildingCode) {
         try {
-            JSONObject jsonBuilding = new JSONObject(buildingResultJSON);
-            JSONObject buildingResultObj;
+            URL url = new URL(String.format(buildBuildingURL(buildingCode)));
+
+            Log.d(TAG, "buildingUrl: " + url);
+            //URL url = new URL(String.format(CLASSMERE_BASE_URL, CLASSMERE_BUILDING_BASE, buildingCode));
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+
+            StringBuffer json = new StringBuffer(1024);
+
+            String temp = "";
+
+            while((temp=reader.readLine())!=null)
+                json.append(temp).append("\n");
+            reader.close();
+
+            JSONObject data = new JSONObject(json.toString());
+
+            Log.d(TAG, "data is: " + data);
+
+            // This value will be 404 if the request was not successful
+            if(data.getInt("code") != 200){
+                return null;
+            }
+
+            return data;
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static BuildingItem parseBuildingJSON(JSONObject buildingResultsJSON) {
+        try {
+
+            if(buildingResultsJSON != null) {
+                JSONObject buildingResultObj;
+                Log.d(TAG, "buildingResultsJSON isn't null! ");
+            }
+            else {
+                Log.d(TAG, "buildingResultsJSON is null...");
+            }
+
 
             BuildingItem buildingItem = new BuildingItem();
 
@@ -249,9 +295,9 @@ public class ClassmereUtils {
 
             return buildingItem;
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            return null;
         }  catch (ParseException e) {
             e.printStackTrace();
             return null;

@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.classmere.classmere.Utilities.ClassmereUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -14,7 +13,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.w3c.dom.Text;
+import com.example.classmere.classmere.Utilities.ClassmereUtils;
+
 
 /**
  * Created by jp on 4/3/18.
@@ -91,6 +91,13 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        // Create string for building code
+        String mBuildingCode = mSectionItem.buildingCode;
+
+        // Build API Query with mBuildingCode
+        String buildingQuery = ClassmereUtils.buildBuildingURL(mBuildingCode);
+        Log.d(TAG, "buildingQuery is: " + buildingQuery);
+
         // Add marker for Oregon State University, move camera to that location
         LatLng OSU = new LatLng(44.563704, -123.279474);
         googleMap.addMarker(new MarkerOptions().position(OSU)
