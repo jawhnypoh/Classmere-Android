@@ -1,7 +1,9 @@
 package com.example.classmere.classmere;
 
+import android.app.LoaderManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
@@ -20,9 +22,13 @@ import com.example.classmere.classmere.Utilities.ClassmereUtils;
  * Created by jp on 4/3/18.
  */
 
-public class detailedSectionResultActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class detailedSectionResultActivity extends AppCompatActivity implements OnMapReadyCallback, LoaderManager.LoaderCallbacks<String> {
 
     private static final String TAG = "detailedSectionActivity: ";
+
+    private static final String BUILDING_SEARCH_KEY = "buildingSearchURL";
+
+    public int CLASSMERE_BUILDING_SEARCH_LOADER_ID = 0;
 
     private TextView mTVSectionResultTitle;
     private TextView mTVSectionResultCredits;
@@ -87,6 +93,12 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
         else {
             Log.d(TAG, "if statement conditions not met ");
         }
+
+        getSupportLoaderManager().initLoader(CLASSMERE_BUILDING_SEARCH_LOADER_ID, null, this);
+    }
+
+    private void doBuildingSearch(String buildingQuery) {
+
     }
 
     @Override
@@ -103,5 +115,30 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
         googleMap.addMarker(new MarkerOptions().position(OSU)
                 .title("Oregon State University"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(OSU));
+    }
+
+    @Override
+    public Loader<String> onCreateLoader(int id, Bundle args) {
+        String buildingSearchURL = null;
+        if(args != null) {
+            buildingSearchURL = args.getString(BUILDING_SEARCH_KEY);
+        }
+
+        return new CourseSectionLoader(this, buildingSearchURL);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<String> loader, String data) {
+        if(data != null) {
+            ClassmereUtils.BuildingItem mBuildingItem = ClassmereUtils.parseBuildingJSON(data);
+        }
+        else {
+            Log.d(TAG, "data returned null ");
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<String> loader) {
+        // Nothing to do here
     }
 }
