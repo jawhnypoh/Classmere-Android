@@ -236,9 +236,9 @@ public class ClassmereUtils {
 
     public static BuildingItem parseBuildingJSON(String buildingResultsJSON) {
         try {
+            JSONObject buildingResultObj;
 
             if(buildingResultsJSON != null) {
-                JSONObject buildingResultObj;
                 Log.d(TAG, "buildingResultsJSON isn't null! ");
             }
             else {

@@ -1,6 +1,6 @@
 package com.example.classmere.classmere;
 
-import android.app.LoaderManager;
+import android.support.v4.app.LoaderManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
@@ -93,6 +93,16 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
             mTVSectionResultEnrollment.setText("Enrollment: " + mSectionItem.enrollmentCurr + " student(s) enrolled, " + mSectionItem.enrollmentLeft + " spots left ");
             mTvSectionResultDates.setText("Dates: " + mSectionItem.startDate + " - " + mSectionItem.endDate);
             mTVSectionResultCrn.setText("CRN: " + mSectionItem.courseCrn);
+
+            // Create string for building code
+            String mBuildingCode = mSectionItem.buildingCode;
+
+            // Build API Query with mBuildingCode
+            String buildingQuery = ClassmereUtils.buildBuildingURL(mBuildingCode);
+            Log.d(TAG, "buildingQuery is: " + buildingQuery);
+
+
+            doBuildingSearch(buildingQuery);
         }
         else {
             Log.d(TAG, "if statement conditions not met ");
@@ -104,15 +114,15 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        // Create string for building code
-        String mBuildingCode = mSectionItem.buildingCode;
-
-        // Build API Query with mBuildingCode
-        String buildingQuery = ClassmereUtils.buildBuildingURL(mBuildingCode);
-        Log.d(TAG, "buildingQuery is: " + buildingQuery);
-
-
-        doBuildingSearch(buildingQuery);
+//        // Create string for building code
+//        String mBuildingCode = mSectionItem.buildingCode;
+//
+//        // Build API Query with mBuildingCode
+//        String buildingQuery = ClassmereUtils.buildBuildingURL(mBuildingCode);
+//        Log.d(TAG, "buildingQuery is: " + buildingQuery);
+//
+//
+//        doBuildingSearch(buildingQuery);
 
         // Add marker for Oregon State University, move camera to that location
         LatLng OSU = new LatLng(44.563704, -123.279474);
@@ -139,6 +149,9 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
         if(args != null) {
             buildingSearchURL = args.getString(BUILDING_SEARCH_KEY);
         }
+        else {
+            Log.e(TAG, "args returned null ");
+        }
 
         Log.d(TAG, "onCreateLoader() buildingSearchURL: " + buildingSearchURL);
         return new CourseSectionLoader(this, buildingSearchURL);
@@ -154,6 +167,7 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
         }
         else {
             // Error, didn't load
+            Log.e(TAG, "ERROR: Could not load data!! ");
         }
     }
 

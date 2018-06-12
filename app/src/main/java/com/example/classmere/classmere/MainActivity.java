@@ -93,9 +93,6 @@ public class MainActivity extends AppCompatActivity implements CourseAdapter.OnC
             }
         });
 
-        String startQuery = "";
-        //doCourseSearch(startQuery);
-
         getSupportLoaderManager().initLoader(CLASSMERE_SEARCH_LOADER_ID, null, this);
     }
 
