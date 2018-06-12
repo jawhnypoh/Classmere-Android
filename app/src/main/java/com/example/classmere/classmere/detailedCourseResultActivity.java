@@ -75,20 +75,20 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
         mapFragment.getMapAsync(this);
     }
 
-    private void doBuildingSearch(String buildingQuery) {
-
-        String buildingResults = null;
-        try {
-            buildingResults = NetworkUtils.doHTTPGet(buildingQuery);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //JSONObject buildingJSON = ClassmereUtils.getBuildingJSON(buildingQuery.toString());
-
-        ClassmereUtils.BuildingItem mBuildingItem = ClassmereUtils.parseBuildingJSON(buildingResults);
-    }
+//    private void doBuildingSearch(String buildingQuery) {
+//
+//        String buildingResults = null;
+//        try {
+//            buildingResults = NetworkUtils.doHTTPGet(buildingQuery);
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        //JSONObject buildingJSON = ClassmereUtils.getBuildingJSON(buildingQuery.toString());
+//
+//        ClassmereUtils.BuildingItem mBuildingItem = ClassmereUtils.parseBuildingJSON(buildingResults);
+//    }
 
     @Override
     public void onCourseSectionItemClick(ClassmereUtils.CourseItem.SectionItem sectionItem) {
@@ -101,7 +101,7 @@ public class detailedCourseResultActivity extends AppCompatActivity implements C
     public void onMapReady(GoogleMap googleMap) {
         String data = "http://api.classmere.com/buildings/LINC";
 
-        doBuildingSearch(data);
+        //doBuildingSearch(data);
 
         // Add marker for Oregon State University, move camera to that location
         LatLng OSU = new LatLng(44.563704, -123.279474);

@@ -17,6 +17,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.example.classmere.classmere.Utilities.ClassmereUtils;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by jp on 4/3/18.
@@ -41,6 +43,8 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
     private TextView mTVSectionResultEnrollment;
     private TextView mTvSectionResultDates;
     private TextView mTVSectionResultCrn;
+
+    private CourseSectionAdapter mCourseSectionAdapter;
 
     private ClassmereUtils.CourseItem.SectionItem mSectionItem;
 
@@ -95,9 +99,6 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
         }
 
         getSupportLoaderManager().initLoader(CLASSMERE_BUILDING_SEARCH_LOADER_ID, null, this);
-    }
-
-    private void doBuildingSearch(String buildingQuery) {
 
     }
 
@@ -110,11 +111,26 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
         String buildingQuery = ClassmereUtils.buildBuildingURL(mBuildingCode);
         Log.d(TAG, "buildingQuery is: " + buildingQuery);
 
+
+        doBuildingSearch(buildingQuery);
+
         // Add marker for Oregon State University, move camera to that location
         LatLng OSU = new LatLng(44.563704, -123.279474);
         googleMap.addMarker(new MarkerOptions().position(OSU)
                 .title("Oregon State University"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(OSU));
+    }
+
+    private void doBuildingSearch(String buildingQuery) {
+
+        String buildingSearchURL = buildingQuery;
+        Log.d(TAG, "buildingSearchURL is: " + buildingSearchURL);
+        Bundle args = new Bundle();
+        args.putString(BUILDING_SEARCH_KEY, buildingSearchURL);
+
+        getSupportLoaderManager().restartLoader(CLASSMERE_BUILDING_SEARCH_LOADER_ID, args, this);
+
+        //ClassmereUtils.BuildingItem mBuildingItem = ClassmereUtils.parseBuildingJSON(buildingResults);
     }
 
     @Override
@@ -124,21 +140,25 @@ public class detailedSectionResultActivity extends AppCompatActivity implements 
             buildingSearchURL = args.getString(BUILDING_SEARCH_KEY);
         }
 
+        Log.d(TAG, "onCreateLoader() buildingSearchURL: " + buildingSearchURL);
         return new CourseSectionLoader(this, buildingSearchURL);
     }
 
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
+        Log.d(TAG, "Data is: " + data);
+        Log.d(TAG, "Got results from loader. ");
         if(data != null) {
-            ClassmereUtils.BuildingItem mBuildingItem = ClassmereUtils.parseBuildingJSON(data);
+            ClassmereUtils.BuildingItem buildingItem = ClassmereUtils.parseBuildingJSON(data);
+            //mCourseSectionAdapter.updateCourseSectionItems(buildingItem);
         }
         else {
-            Log.d(TAG, "data returned null ");
+            // Error, didn't load
         }
     }
 
     @Override
     public void onLoaderReset(Loader<String> loader) {
-        // Nothing to do here
+        // Nothing here
     }
 }
